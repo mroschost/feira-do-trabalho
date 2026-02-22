@@ -1,0 +1,77 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^ index.html [L]
+</IfModule>
+
+<IfModule mod_headers.c>
+  Header set X-Powered-By "MROSC"
+
+  # Cache everything on CDN by default
+  Header set Cache-Control "public, s-maxage=604800, max-age=0"
+  
+  # Cache in browser all assets
+  <If "%{REQUEST_URI} =~ m#^/assets/.*$#">
+    Header set Cache-Control "public, max-age=604800"
+  </If>ß
+</IfModule>
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # Do not rewrite real files/directories
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  # Never rewrite static assets (avoid MIME type text/html on JS modules)
+  RewriteRule ^assets/ - [L]
+
+  # SPA fallback
+  RewriteRule ^ index.html [L]
+</IfModule>
+
+<IfModule mod_headers.c>
+  Header set X-Powered-By "MROSC"
+
+  # Cache everything on CDN by default
+  Header set Cache-Control "public, s-maxage=604800, max-age=0"
+
+  # Cache in browser all assets
+  <If "%{REQUEST_URI} =~ m#^/assets/.*$#">
+    Header set Cache-Control "public, max-age=604800"
+  </If>
+</IfModule>
+# --- SPA (React/Vite) routing + safe static asset handling ---
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # Never rewrite real files or directories
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  # Extra safety: never route /assets/* to index.html
+  RewriteRule ^assets/ - [L]
+
+  # SPA fallback
+  RewriteRule ^ index.html [L]
+</IfModule>
+
+<IfModule mod_headers.c>
+  # Optional branding header
+  Header set X-Powered-By "MROSC"
+
+  # Default: let CDN cache, but browsers revalidate by default
+  Header set Cache-Control "public, s-maxage=604800, max-age=0"
+
+  # Long cache for hashed static assets (Vite outputs hashed filenames)
+  <FilesMatch "\.(?:js|css|map|json|png|jpe?g|gif|webp|avif|svg|ico|woff2?|ttf|eot)$">
+    Header set Cache-Control "public, max-age=604800, immutable"
+  </FilesMatch>
+</IfModule>
