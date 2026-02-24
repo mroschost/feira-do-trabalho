@@ -1,0 +1,81 @@
+name: Deploy - Hostinger (SSH)
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build project
+        run: npm run build
+
+      - name: Start ssh-agent and add key
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Add SSH known_hosts
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+
+          PORT="${{ secrets.SSH_PORT }}"
+          if [ -z "${PORT}" ]; then PORT="65002"; fi
+
+          HOSTPORT="[${{ secrets.SSH_HOST }}]:${PORT}"
+
+          echo "Fetching host key for ${HOSTPORT}..."
+
+          # Retry a few times because some hosts may take a moment to respond
+          for i in 1 2 3; do
+            ssh-keyscan -p "${PORT}" -T 10 -t rsa,ecdsa,ed25519 "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts && break
+            echo "ssh-keyscan attempt ${i} failed; retrying in 2s..."
+            sleep 2
+          done
+
+          # Fail explicitly if we still have no host key
+          if ! ssh-keygen -F "${HOSTPORT}" -f ~/.ssh/known_hosts >/dev/null; then
+            echo "Failed to add host key to known_hosts for ${HOSTPORT}. Verify SSH_HOST/SSH_PORT and confirm SSH is enabled in Hostinger." >&2
+            exit 1
+          fi
+
+          chmod 600 ~/.ssh/known_hosts
+
+      - name: Test SSH connection
+        shell: bash
+        run: |
+          set -euo pipefail
+          PORT="${{ secrets.SSH_PORT }}"
+          if [ -z "${PORT}" ]; then PORT="65002"; fi
+
+          ssh -p "${PORT}" -o BatchMode=yes -o ConnectTimeout=10 "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" "echo SSH OK"
+
+      - name: Deploy dist to Hostinger via rsync
+        run: |
+          PORT="${{ secrets.SSH_PORT }}"; if [ -z "${PORT}" ]; then PORT="65002"; fi
+          rsync -avz --delete -e "ssh -p ${PORT}" dist/ \
+            ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.SSH_PATH }}
