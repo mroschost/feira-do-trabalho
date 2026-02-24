@@ -171,6 +171,38 @@
     }
   ],
   "cruzeiro-2025": [],
-  "brazlandia-2026": [],
-  "santa-maria-2026":[]
+  "brazlandia-2026": [
+    {
+      "title": "Brazlândia recebe 7ª Feira do Trabalho e do Campo com vagas e qualificação",
+      "summary": "A Secretaria de Desenvolvimento Econômico, Trabalho e Renda (Sedet-DF) promove, de 26 a 31 de janeiro, a 7ª edição da Feira do Trabalho e do Campo em Brazlândia. Realizado na Praça do Laço, o evento é gratuito e aberto ao público, com o objetivo de fortalecer a economia local, estimular a geração de emprego e renda, e valorizar o trabalho urbano e rural na região.",
+      "image": "https://cdn.jornaldebrasilia.com.br/wp-content/uploads/2026/01/25161813/54670264189_8344675731_o-1-620x620.jpg",
+      "link": "https://jornaldebrasilia.com.br/brasilia/brazlandia-recebe-7a-feira-do-trabalho-e-do-campo-com-vagas-e-qualificacao/"
+    },
+    {
+      "title": "GDF leva capacitação profissional para produtores rurais de Brazlândia",
+      "summary": "Brazlândia se prepara para receber a 7ª Feira do Trabalho e do Campo, que acontece entre os dias 26 e 31 de janeiro, na Praça do Laço, no centro da cidade. A iniciativa tem como foco o fortalecimento da economia local, a geração de emprego e renda e a valorização do trabalhador urbano e rural da região.",
+      "image": "https://radardigitalbrasilia.com.br/wp-content/uploads/2026/01/Marca-Monograma-com-Circulo-e-Iniciais-Douradas-350-x-300-px-1080-x-1350-px.png",
+      "link": "https://radardigitalbrasilia.com.br/cidades/gdf-leva-capacitacao-profissional-para-produtores-rurais-de-brazlandia/"
+    },
+    {
+      "title": "Brazlândia Realiza 7ª Feira do Trabalho e Campo com Muitas Vagas e Cursos",
+      "summary": "A Secretaria de Desenvolvimento Econômico, Trabalho e Renda (Sedet-DF) promove, entre os dias 26 e 31 de janeiro, a 7ª Feira do Trabalho e do Campo em Brazlândia. O evento gratuito acontece na Praça do Laço e tem como objetivo fortalecer a economia local, criar empregos e valorizar o trabalho tanto na cidade quanto no campo.",
+      "image": "https://imprensapublica.com.br/wp-content/uploads/2026/01/54670264189_8344675731_o-1-620x620.jpg.jpg",
+      "link": "https://imprensapublica.com.br/brazlandia-realiza-7a-feira-do-trabalho-e-campo-com-muitas-vagas-e-cursos/"
+    }
+  ],
+  "santa-maria-2026":[
+    {
+      "title": "Feira do Trabalho e do Campo chega a Santa Maria",
+      "summary": "Oitava edição do evento será realizada de 23 a 28 de fevereiro, atrás da administração regional da cidade",
+      "image": "https://www.agenciabrasilia.df.gov.br/documents/d/guest/whatsapp-image-2026-02-19-at-14-59-12-jpeg",
+      "link": "https://www.agenciabrasilia.df.gov.br/w/feira-do-trabalho-e-do-campo-chega-a-santa-maria"
+    },
+    {
+      "title": "8ª Feira do Trabalho e do Campo em Santa Maria de 23 a 28 de fevereiro",
+      "summary": "A Secretaria de Desenvolvimento Econômico, Trabalho e Renda do Distrito Federal (Sedet-DF) promove, de 23 a 28 de fevereiro, a 8ª edição da Feira do Trabalho e do Campo, em Santa Maria. O evento, realizado na Quadra Central 1, Conjunto H, Lote 1, ao lado do ginásio e atrás da administração regional da cidade, é gratuito e aberto ao público.\n\n",
+      "image": "https://cdn.jornaldebrasilia.com.br/wp-content/uploads/2026/02/19152231/WhatsApp-Image-2026-02-19-at-14.59.12-620x620.jpeg",
+      "link": "https://jornaldebrasilia.com.br/brasilia/8a-feira-do-trabalho-e-do-campo-em-santa-maria-de-23-a-28-de-fevereiro/"
+    }
+  ]
 }
