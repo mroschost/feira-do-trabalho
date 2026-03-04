@@ -7,7 +7,10 @@
           "time": "08:00-11:00",
           "title": "Curso: Gestão Financeira e Plano de Negócios"
         },
-        { "time": "14:00-17:00", "title": "Curso: Cooperativismo e autogestão" }
+        {
+          "time": "14:00-17:00",
+          "title": "Curso: Cooperativismo e autogestão"
+        }
       ]
     },
     {
@@ -21,8 +24,14 @@
           "time": "08:00-11:00",
           "title": "Curso: Gestão Financeira e Plano de Negócios"
         },
-        { "time": "09:00-11:00", "title": "Oficina: Feiras Solidárias" },
-        { "time": "14:00-17:00", "title": "Curso: Cooperativismo e autogestão" }
+        {
+          "time": "09:00-11:00",
+          "title": "Oficina: Feiras Solidárias"
+        },
+        {
+          "time": "14:00-17:00",
+          "title": "Curso: Cooperativismo e autogestão"
+        }
       ]
     },
     {
@@ -36,7 +45,10 @@
           "time": "08:00-11:00",
           "title": "Curso: Gestão Financeira e Plano de Negócios"
         },
-        { "time": "14:00-17:00", "title": "Curso: Cooperativismo e autogestão" }
+        {
+          "time": "14:00-17:00",
+          "title": "Curso: Cooperativismo e autogestão"
+        }
       ]
     },
     {
@@ -66,7 +78,10 @@
           "time": "14:00-16:00",
           "title": "Oficina: Precificação para pequenos negócios"
         },
-        { "time": "15:00-17:00", "title": "Oficina: Embalagem sustentável" }
+        {
+          "time": "15:00-17:00",
+          "title": "Oficina: Embalagem sustentável"
+        }
       ]
     },
     {
@@ -92,7 +107,10 @@
           "time": "15:00-16:00",
           "title": "Palestra: Direitos do Microempreendedor"
         },
-        { "time": "17:00-18:00", "title": "Apresentação Artística" }
+        {
+          "time": "17:00-18:00",
+          "title": "Apresentação Artística"
+        }
       ]
     },
     {
@@ -106,9 +124,18 @@
           "time": "08:00-11:00",
           "title": "Curso: Gestão Financeira e Plano de Negócios"
         },
-        { "time": "10:00-12:00", "title": "Entrega de Certificados" },
-        { "time": "11:00-13:00", "title": "Apresentação Artística" },
-        { "time": "14:00-17:00", "title": "Curso: Cooperativismo e autogestão" }
+        {
+          "time": "10:00-12:00",
+          "title": "Entrega de Certificados"
+        },
+        {
+          "time": "11:00-13:00",
+          "title": "Apresentação Artística"
+        },
+        {
+          "time": "14:00-17:00",
+          "title": "Curso: Cooperativismo e autogestão"
+        }
       ]
     }
   ],
@@ -124,7 +151,10 @@
           "time": "08:00-11:00",
           "title": "Curso: Gestão Financeira e Plano de Negócios"
         },
-        { "time": "14:00-17:00", "title": "Curso: Cooperativismo e autogestão" }
+        {
+          "time": "14:00-17:00",
+          "title": "Curso: Cooperativismo e autogestão"
+        }
       ]
     },
     {
@@ -138,7 +168,10 @@
           "time": "08:00-11:00",
           "title": "Curso: Gestão Financeira e Plano de Negócios"
         },
-        { "time": "09:00-11:00", "title": "Oficina: Fuxico Sustentável" },
+        {
+          "time": "09:00-11:00",
+          "title": "Oficina: Fuxico Sustentável"
+        },
         {
           "time": "14:00-17:00",
           "title": "Curso: Cooperativismo e autogestão"
@@ -164,8 +197,14 @@
           "time": "09:00-11:00",
           "title": "Oficina: Biojoias e Artesanato Natural"
         },
-        { "time": "14:00-16:00", "title": "Oficina: Feiras Solidárias" },
-        { "time": "14:00-17:00", "title": "Curso: Cooperativismo e autogestão" }
+        {
+          "time": "14:00-16:00",
+          "title": "Oficina: Feiras Solidárias"
+        },
+        {
+          "time": "14:00-17:00",
+          "title": "Curso: Cooperativismo e autogestão"
+        }
       ]
     },
     {
@@ -216,7 +255,10 @@
           "time": "15:00-16:00",
           "title": "Palestra: Direitos do Microempreendedor"
         },
-        { "time": "17:00-18:00", "title": "Apresentação Artística" }
+        {
+          "time": "17:00-18:00",
+          "title": "Apresentação Artística"
+        }
       ]
     },
     {
@@ -230,9 +272,18 @@
           "time": "08:00-11:00",
           "title": "Curso: Gestão Financeira e Plano de Negócios"
         },
-        { "time": "10:00-12:00", "title": "Entrega de Certificados" },
-        { "time": "11:00-13:00", "title": "Apresentação Artística" },
-        { "time": "14:00-17:00", "title": "Curso: Cooperativismo e autogestão" }
+        {
+          "time": "10:00-12:00",
+          "title": "Entrega de Certificados"
+        },
+        {
+          "time": "11:00-13:00",
+          "title": "Apresentação Artística"
+        },
+        {
+          "time": "14:00-17:00",
+          "title": "Curso: Cooperativismo e autogestão"
+        }
       ]
     }
   ],
@@ -244,7 +295,10 @@
           "time": "08:00-18:00",
           "title": "Feira de produtos rurais e artesanato"
         },
-        { "time": "10:00", "title": "Abertura Oficial" },
+        {
+          "time": "10:00",
+          "title": "Abertura Oficial"
+        },
         {
           "time": "08:00-11:00",
           "title": "Cursos: Introdução ao Empreendedorismo"
@@ -345,7 +399,10 @@
           "time": "14:00-17:00",
           "title": "Cursos: Inovação, Empreendedorismo, Novos Negócios; Multifuncionalidade da agricultura com foco no Turismo Rural"
         },
-        { "time": "17:00-18:00", "title": "Apresentação Artística" }
+        {
+          "time": "17:00-18:00",
+          "title": "Apresentação Artística"
+        }
       ]
     },
     {
@@ -363,7 +420,10 @@
           "time": "09:00-11:00",
           "title": "Palestra: Direitos do Empreendedor; Aposentadoria Rural do Homem e da Mulher do Campo"
         },
-        { "time": "11:00-13:00", "title": "Apresentação Artística" },
+        {
+          "time": "11:00-13:00",
+          "title": "Apresentação Artística"
+        },
         {
           "time": "14:00-17:00",
           "title": "Cursos: Inovação, Empreendedorismo, Novos Negócios; Multifuncionalidade da agricultura com foco no Turismo Rural"
@@ -375,8 +435,14 @@
     {
       "date": "2025-07-21",
       "items": [
-        { "time": "09:00", "title": "Abertura oficial" },
-        { "time": "08:00-18:00", "title": "Exposição de Produtos" },
+        {
+          "time": "09:00",
+          "title": "Abertura oficial"
+        },
+        {
+          "time": "08:00-18:00",
+          "title": "Exposição de Produtos"
+        },
         {
           "time": "08:00-11:00",
           "title": "Cursos: Introdução ao Empreendedorismo"
@@ -398,7 +464,10 @@
     {
       "date": "2025-07-22",
       "items": [
-        { "time": "08:00-18:00", "title": "Exposição de Produtos" },
+        {
+          "time": "08:00-18:00",
+          "title": "Exposição de Produtos"
+        },
         {
           "time": "08:00-11:00",
           "title": "Cursos: Introdução ao Empreendedorismo"
@@ -420,7 +489,10 @@
     {
       "date": "2025-07-23",
       "items": [
-        { "time": "08:00-18:00", "title": "Exposição de Produtos" },
+        {
+          "time": "08:00-18:00",
+          "title": "Exposição de Produtos"
+        },
         {
           "time": "08:00-11:00",
           "title": "Cursos: Introdução ao Empreendedorismo"
@@ -446,7 +518,10 @@
     {
       "date": "2025-07-24",
       "items": [
-        { "time": "08:00-18:00", "title": "Exposição de Produtos" },
+        {
+          "time": "08:00-18:00",
+          "title": "Exposição de Produtos"
+        },
         {
           "time": "08:00-11:00",
           "title": "Cursos: Introdução ao Empreendedorismo"
@@ -468,7 +543,10 @@
     {
       "date": "2025-07-25",
       "items": [
-        { "time": "08:00-18:00", "title": "Exposição de Produtos" },
+        {
+          "time": "08:00-18:00",
+          "title": "Exposição de Produtos"
+        },
         {
           "time": "08:00-11:00",
           "title": "Cursos: Introdução ao Empreendedorismo"
@@ -481,13 +559,19 @@
           "time": "14:00-17:00",
           "title": "Cursos: Inovação, Empreendedorismo e Novos Negócios; Multifuncionalidade da agricultura com foco no Turismo Rural"
         },
-        { "time": "19:00", "title": "Apresentação Artística" }
+        {
+          "time": "19:00",
+          "title": "Apresentação Artística"
+        }
       ]
     },
     {
       "date": "2025-07-26",
       "items": [
-        { "time": "08:00-18:00", "title": "Exposição de Produtos" },
+        {
+          "time": "08:00-18:00",
+          "title": "Exposição de Produtos"
+        },
         {
           "time": "08:00-11:00",
           "title": "Cursos: Introdução ao Empreendedorismo"
@@ -500,7 +584,10 @@
           "time": "14:00-17:00",
           "title": "Cursos: Inovação, Empreendedorismo e Novos Negócios; Multifuncionalidade da agricultura com foco no Turismo Rural"
         },
-        { "time": "19:00", "title": "Apresentação Artística" }
+        {
+          "time": "19:00",
+          "title": "Apresentação Artística"
+        }
       ]
     }
   ],
@@ -521,7 +608,10 @@
           "time": "08:00-18:00",
           "title": "Feira de produtos rurais e artesanato"
         },
-        { "time": "08:00-11:00", "title": "Curso: Marketing Digital e Vendas" },
+        {
+          "time": "08:00-11:00",
+          "title": "Curso: Marketing Digital e Vendas"
+        },
         {
           "time": "14:00-17:00",
           "title": "Curso: Economia Circular e Sustentabilidade"
@@ -539,8 +629,14 @@
           "time": "08:00-18:00",
           "title": "Feira de produtos rurais e artesanato"
         },
-        { "time": "08:00-11:00", "title": "Curso: Marketing Digital e Vendas" },
-        { "time": "09:00-11:00", "title": "Oficina: Vendas em Redes Sociais" },
+        {
+          "time": "08:00-11:00",
+          "title": "Curso: Marketing Digital e Vendas"
+        },
+        {
+          "time": "09:00-11:00",
+          "title": "Oficina: Vendas em Redes Sociais"
+        },
         {
           "time": "14:00-17:00",
           "title": "Curso: Economia Circular e Sustentabilidade"
@@ -554,7 +650,10 @@
           "time": "08:00-18:00",
           "title": "Feira de produtos rurais e artesanato"
         },
-        { "time": "08:00-11:00", "title": "Curso: Marketing Digital e Vendas" },
+        {
+          "time": "08:00-11:00",
+          "title": "Curso: Marketing Digital e Vendas"
+        },
         {
           "time": "09:00-11:00",
           "title": "Oficina: Reaproveitamento e Upcycling – Ana Cláudia"
@@ -576,8 +675,14 @@
           "time": "08:00-18:00",
           "title": "Feira de produtos rurais e artesanato"
         },
-        { "time": "08:00-11:00", "title": "Curso: Marketing Digital e Vendas" },
-        { "time": "09:00-11:00", "title": "Oficina: Fotografia pelo Celular" },
+        {
+          "time": "08:00-11:00",
+          "title": "Curso: Marketing Digital e Vendas"
+        },
+        {
+          "time": "09:00-11:00",
+          "title": "Oficina: Fotografia pelo Celular"
+        },
         {
           "time": "14:00-17:00",
           "title": "Curso: Economia Circular e Sustentabilidade"
@@ -595,9 +700,18 @@
           "time": "08:00-18:00",
           "title": "Feira de produtos rurais e artesanato"
         },
-        { "time": "08:00-11:00", "title": "Curso: Marketing Digital e Vendas" },
-        { "time": "10:00-12:00", "title": "Entrega de certificados" },
-        { "time": "11:00-13:00", "title": "Apresentação Artística" },
+        {
+          "time": "08:00-11:00",
+          "title": "Curso: Marketing Digital e Vendas"
+        },
+        {
+          "time": "10:00-12:00",
+          "title": "Entrega de certificados"
+        },
+        {
+          "time": "11:00-13:00",
+          "title": "Apresentação Artística"
+        },
         {
           "time": "14:00-17:00",
           "title": "Curso: Economia Circular e Sustentabilidade"
@@ -606,7 +720,10 @@
           "time": "15:00-16:00",
           "title": "Palestra: Justiça Social no Fazer Econômico"
         },
-        { "time": "17:00-18:00", "title": "Apresentação Artística" }
+        {
+          "time": "17:00-18:00",
+          "title": "Apresentação Artística"
+        }
       ]
     }
   ],
@@ -652,7 +769,10 @@
           "time": "08:00-11:00",
           "title": "Curso: Marketing Digital e Vendas (Prof.ª Vanessa Rangel)"
         },
-        { "time": "09:00-11:00", "title": "Oficina: Feiras Solidárias" },
+        {
+          "time": "09:00-11:00",
+          "title": "Oficina: Feiras Solidárias"
+        },
         {
           "time": "14:00-17:00",
           "title": "Curso: Economia Circular e Sustentabilidade"
@@ -736,8 +856,14 @@
           "time": "08:00-11:00",
           "title": "Curso: Marketing Digital e Vendas (Prof.ª Vanessa Rangel)"
         },
-        { "time": "10:00-12:00", "title": "Entrega de certificados" },
-        { "time": "11:00-13:00", "title": "Apresentação Artística" },
+        {
+          "time": "10:00-12:00",
+          "title": "Entrega de certificados"
+        },
+        {
+          "time": "11:00-13:00",
+          "title": "Apresentação Artística"
+        },
         {
           "time": "14:00-17:00",
           "title": "Curso: Economia Circular e Sustentabilidade"
@@ -753,7 +879,10 @@
           "time": "08:00-11:00",
           "title": "Curso: Gestão Financeira e Plano de Negócios"
         },
-        { "time": "14:00-17:00", "title": "Curso: Cooperativismo e autogestão" }
+        {
+          "time": "14:00-17:00",
+          "title": "Curso: Cooperativismo e autogestão"
+        }
       ]
     },
     {
@@ -767,7 +896,10 @@
           "time": "08:00-11:00",
           "title": "Curso: Gestão Financeira e Plano de Negócios"
         },
-        { "time": "14:00-17:00", "title": "Curso: Cooperativismo e autogestão" }
+        {
+          "time": "14:00-17:00",
+          "title": "Curso: Cooperativismo e autogestão"
+        }
       ]
     },
     {
@@ -781,12 +913,18 @@
           "time": "08:00-11:00",
           "title": "Curso: Gestão Financeira e Plano de Negócios"
         },
-        { "time": "09:00-11:00", "title": "Oficina: Fotografia com Celular" },
+        {
+          "time": "09:00-11:00",
+          "title": "Oficina: Fotografia com Celular"
+        },
         {
           "time": "14:00-17:00",
           "title": "Curso: Cooperativismo e autogestão"
         },
-        { "time": "15:00-17:00", "title": "Oficina: Vendas em redes sociais" },
+        {
+          "time": "15:00-17:00",
+          "title": "Oficina: Vendas em redes sociais"
+        },
         {
           "time": "15:00-16:00",
           "title": "Palestra: Soberania Alimentar e Produção Orgânica"
@@ -804,12 +942,18 @@
           "time": "08:00-11:00",
           "title": "Curso: Gestão Financeira e Plano de Negócios"
         },
-        { "time": "09:00-11:00", "title": "Oficina: Negócio com Alma" },
+        {
+          "time": "09:00-11:00",
+          "title": "Oficina: Negócio com Alma"
+        },
         {
           "time": "14:00-17:00",
           "title": "Curso: Cooperativismo e autogestão"
         },
-        { "time": "14:00-16:00", "title": "Oficina: A Força do Coletivo" }
+        {
+          "time": "14:00-16:00",
+          "title": "Oficina: A Força do Coletivo"
+        }
       ]
     },
     {
@@ -827,8 +971,14 @@
           "time": "14:00-17:00",
           "title": "Curso: Cooperativismo e autogestão"
         },
-        { "time": "13:00-15:00", "title": "Oficina: Tricô Coletivo" },
-        { "time": "15:00-18:00", "title": "Oficina: Embalagem Sustentável" },
+        {
+          "time": "13:00-15:00",
+          "title": "Oficina: Tricô Coletivo"
+        },
+        {
+          "time": "15:00-18:00",
+          "title": "Oficina: Embalagem Sustentável"
+        },
         {
           "time": "15:00-16:00",
           "title": "Palestra: Direitos do Microempreendedor"
@@ -846,16 +996,30 @@
           "time": "08:00-11:00",
           "title": "Curso: Gestão Financeira e Plano de Negócios"
         },
-        { "time": "10:00-12:00", "title": "Entrega de certificados" },
-        { "time": "11:00-13:00", "title": "Apresentação Artística" },
-        { "time": "14:00-17:00", "title": "Curso: Cooperativismo e autogestão" }
+        {
+          "time": "10:00-12:00",
+          "title": "Entrega de certificados"
+        },
+        {
+          "time": "11:00-13:00",
+          "title": "Apresentação Artística"
+        },
+        {
+          "time": "14:00-17:00",
+          "title": "Curso: Cooperativismo e autogestão"
+        }
       ]
     }
   ],
   "santa-maria-2026": [
     {
       "date": "2026-02-23",
-      "items": [{ "time": "09:00-17:00", "title": "Visitação aberta" }]
+      "items": [
+        {
+          "time": "09:00-17:00",
+          "title": "Visitação aberta"
+        }
+      ]
     },
     {
       "date": "2026-02-24",
@@ -868,7 +1032,10 @@
           "time": "10:00-12:00",
           "title": "Oficina: Precificação para Pequenos Negócios"
         },
-        { "time": "14:00-16:00", "title": "Oficina: Vendas em redes sociais" }
+        {
+          "time": "14:00-16:00",
+          "title": "Oficina: Vendas em redes sociais"
+        }
       ]
     },
     {
@@ -878,8 +1045,14 @@
           "time": "09:00-19:00",
           "title": "Feira de produtos rurais e artesanato"
         },
-        { "time": "09:00-11:00", "title": "Oficina: Identidade visual" },
-        { "time": "15:00-16:00", "title": "Palestra: Trabalhar Sem Patrão" }
+        {
+          "time": "09:00-11:00",
+          "title": "Oficina: Identidade visual"
+        },
+        {
+          "time": "15:00-16:00",
+          "title": "Palestra: Trabalhar Sem Patrão"
+        }
       ]
     },
     {
@@ -889,8 +1062,14 @@
           "time": "09:00-19:00",
           "title": "Feira de produtos rurais e artesanato"
         },
-        { "time": "09:00-11:00", "title": "Oficina: Fundo Rotativo Solidário" },
-        { "time": "14:00-16:00", "title": "Oficina: Negócio com Alma" }
+        {
+          "time": "09:00-11:00",
+          "title": "Oficina: Fundo Rotativo Solidário"
+        },
+        {
+          "time": "14:00-16:00",
+          "title": "Oficina: Negócio com Alma"
+        }
       ]
     },
     {
@@ -917,10 +1096,119 @@
           "time": "09:00-19:00",
           "title": "Feira de produtos rurais e artesanato"
         },
-        { "time": "09:00-17:00", "title": "Visitação aberta" },
-        { "time": "10:00-11:00", "title": "Entrega de certificados" },
-        { "time": "11:00-13:00", "title": "Apresentações artísticas" }
+        {
+          "time": "09:00-17:00",
+          "title": "Visitação aberta"
+        },
+        {
+          "time": "10:00-11:00",
+          "title": "Entrega de certificados"
+        },
+        {
+          "time": "11:00-13:00",
+          "title": "Apresentações artísticas"
+        }
       ]
     }
-  ]
+  ],
+  "riacho-fundo-1-2026": [
+         {
+        "date": "2026-03-09",
+        "items": [
+          {
+            "time": "09:00-17:00",
+            "title": "Visitação aberta"
+          },
+          {
+            "time": "14:00-16:00",
+            "title": "Oficina: Reaproveitamento e Upcycling"
+          }
+        ]
+      },
+      {
+        "date": "2026-03-10",
+        "items": [
+          {
+            "time": "09:00-19:00",
+            "title": "Feira de produtos rurais e artesanato"
+          },
+          {
+            "time": "10:30-12:30",
+            "title": "Oficina: Oficina de Feiras Solidárias"
+          },
+          {
+            "time": "14:00-16:00",
+            "title": "Oficina: Embalagem Sustentável"
+          }
+        ]
+      },
+      {
+        "date": "2026-03-11",
+        "items": [
+          {
+            "time": "09:00-19:00",
+            "title": "Feira de produtos rurais e artesanato"
+          },
+          {
+            "time": "09:00-11:00",
+            "title": "Oficina: A Força do Coletivo"
+          },
+          {
+            "time": "15:00-16:00",
+            "title": "Palestra: Bem viver como modelo econômico"
+          }
+        ]
+      },
+      {
+        "date": "2026-03-12",
+        "items": [
+          {
+            "time": "09:00-19:00",
+            "title": "Feira de produtos rurais e artesanato"
+          },
+          {
+            "time": "09:00-11:00",
+            "title": "Oficina: Tecnologias Sociais Locais"
+          },
+          {
+            "time": "11:00-13:00",
+            "title": "Oficina: Educação Financeira e Finanças Pessoais"
+          },
+          {
+            "time": "14:00-16:00",
+            "title": "Palestra: Saberes e Cultura com Potência"
+          }
+        ]
+      },
+      {
+        "date": "2026-03-13",
+        "items": [
+          {
+            "time": "09:00-19:00",
+            "title": "Feira de produtos rurais e artesanato"
+          },
+          {
+            "time": "09:00-18:00",
+            "title": "Visitação aberta"
+          }
+        ]
+      },
+      {
+        "date": "2026-03-14",
+        "items": [
+          {
+            "time": "09:00-19:00",
+            "title": "Feira de produtos rurais e artesanato"
+          },
+          {
+            "time": "10:00-11:00",
+            "title": "Entrega de certificados"
+          },
+          {
+            "time": "11:00-13:00",
+            "title": "Apresentações artísticas"
+          }
+        ]
+      }
+    ]
 }

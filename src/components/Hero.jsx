@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import heroMb1 from "@/assets/images/hero_mb_1.jpeg";
 import heroMb2 from "@/assets/images/hero_mb_2.jpeg";
 import heroDesktop from "@/assets/images/hero_desktop.webp";
+import { dataService } from "@/services/DataService";
 
 const Hero = () => {
   const shouldReduce = useReducedMotion();
@@ -15,8 +16,75 @@ const Hero = () => {
     transition: { duration: 0.8, delay },
   });
 
-  const LOCALIZATION = "Ao lado da Administração Santa Maria-DF";
-  const DATE = "23 a 28 de Fevereiro de 2026";
+  const currentEdition = dataService.getCurrentEdition();
+
+  const LOCALIZATION = currentEdition?.location ?? "";
+
+  const splitLocation = (value) => {
+    if (!value) return { place: "", city: "" };
+
+    // Prefer en dash separator used in content: " ... – Cidade "
+    const enDash = value.split(" – ");
+    if (enDash.length >= 2) {
+      const [place, ...rest] = enDash;
+      return { place: place.trim(), city: rest.join(" – ").trim() };
+    }
+
+    // Fallback to hyphen separator " ... - Cidade "
+    const hyphen = value.split(" - ");
+    if (hyphen.length >= 2) {
+      const [place, ...rest] = hyphen;
+      return { place: place.trim(), city: rest.join(" - ").trim() };
+    }
+
+    // No separator found
+    return { place: value.trim(), city: "" };
+  };
+
+  const { place: LOCATION_PLACE, city: LOCATION_CITY } = splitLocation(LOCALIZATION);
+
+  const formatHeroDate = (start, end) => {
+    if (!start || !end) return "";
+
+    const startDate = new Date(`${start}T00:00:00-03:00`);
+    const endDate = new Date(`${end}T00:00:00-03:00`);
+
+    if (Number.isNaN(startDate.getTime()) || Number.isNaN(endDate.getTime())) return "";
+
+    const sameMonth =
+      startDate.getMonth() === endDate.getMonth() &&
+      startDate.getFullYear() === endDate.getFullYear();
+
+    const startDay = String(startDate.getDate()).padStart(2, "0");
+    const endDay = String(endDate.getDate()).padStart(2, "0");
+
+    const monthName = new Intl.DateTimeFormat("pt-BR", { month: "long" }).format(
+      sameMonth ? startDate : endDate
+    );
+    const monthTitle = monthName.charAt(0).toUpperCase() + monthName.slice(1);
+
+    if (sameMonth) {
+      return `${startDay} a ${endDay} de ${monthTitle} de ${startDate.getFullYear()}`;
+    }
+
+    const startLabel = new Intl.DateTimeFormat("pt-BR", {
+      day: "2-digit",
+      month: "long",
+      year: "numeric",
+    }).format(startDate);
+
+    const endLabel = new Intl.DateTimeFormat("pt-BR", {
+      day: "2-digit",
+      month: "long",
+      year: "numeric",
+    }).format(endDate);
+
+    return `${startLabel} a ${endLabel}`;
+  };
+
+  const DATE = formatHeroDate(currentEdition?.startDate, currentEdition?.endDate);
+
+
 
   return (
     <section
@@ -65,13 +133,13 @@ const Hero = () => {
             </motion.p>
 
             <motion.div
-              className="flex flex-col items-center justify-center gap-6 mb-10 sm:flex-row"
+              className="flex flex-col flex-wrap items-center justify-center gap-6 mb-10 sm:flex-row"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
             >
               {/* Data */}
-              <div className="flex items-center gap-3 px-6 py-3 rounded-full shadow-sm bg-white/70 backdrop-blur-sm ring-1 ring-black/5">
+              <div className="flex items-center justify-center gap-3 px-6 py-3 rounded-full shadow-sm bg-white/70 backdrop-blur-sm ring-1 ring-black/5 w-full sm:w-[520px]">
                 <Calendar
                   className="w-6 h-6 text-[#3FA637]"
                   aria-hidden="true"
@@ -85,14 +153,15 @@ const Hero = () => {
               </div>
 
               {/* Local */}
-              <div className="flex items-center gap-3 px-6 py-3 rounded-full shadow-sm bg-white/70 backdrop-blur-sm ring-1 ring-black/5">
+              <div className="flex items-start justify-center gap-3 px-6 py-3 rounded-full shadow-sm bg-white/70 backdrop-blur-sm ring-1 ring-black/5 w-full sm:w-[520px]">
                 <MapPin className="w-6 h-6 text-[#3FA637]" aria-hidden="true" />
-                <span
-                  className="text-lg font-medium text-gray-900
+                <div
+                  className="text-lg font-medium text-gray-900 text-center leading-snug whitespace-normal break-words
                      drop-shadow-[0_1px_0_rgba(255,255,255,0.7)]"
                 >
-                  {LOCALIZATION}
-                </span>
+                  <div>{LOCATION_PLACE}</div>
+                  {LOCATION_CITY ? <div>{LOCATION_CITY}</div> : null}
+                </div>
               </div>
             </motion.div>
 
@@ -162,13 +231,19 @@ const Hero = () => {
             {...fadeUp(0.4)}
             className="flex flex-col items-center justify-center gap-4 mb-8"
           >
-            <div className="flex items-center gap-3 text-gray-700">
+            {/* Data (chip) */}
+            <div className="flex items-center justify-center gap-3 px-5 py-3 rounded-full shadow-sm bg-white/70 backdrop-blur-sm ring-1 ring-black/5 w-full max-w-[520px]">
               <Calendar className="h-5 w-5 text-[#3FA637]" aria-hidden="true" />
-              <span className="font-medium">{DATE}</span>
+              <span className="font-medium text-gray-900">{DATE}</span>
             </div>
-            <div className="flex items-center gap-3 text-gray-700">
-              <MapPin className="h-5 w-5 text-[#3FA637]" aria-hidden="true" />
-              <span className="font-medium">{LOCALIZATION}</span>
+
+            {/* Local (chip) */}
+            <div className="flex items-start justify-center gap-3 px-5 py-3 rounded-full shadow-sm bg-white/70 backdrop-blur-sm ring-1 ring-black/5 w-full max-w-[520px]">
+              <MapPin className="h-5 w-5 text-[#3FA637] mt-0.5" aria-hidden="true" />
+              <div className="font-medium leading-snug text-center text-gray-900 break-words whitespace-normal">
+                <div>{LOCATION_PLACE}</div>
+                {LOCATION_CITY ? <div>{LOCATION_CITY}</div> : null}
+              </div>
             </div>
           </motion.div>
 
@@ -183,6 +258,7 @@ const Hero = () => {
           </motion.div>
         </div>
       </div>
+
     </section>
   );
 };

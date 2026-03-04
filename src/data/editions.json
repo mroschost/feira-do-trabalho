@@ -1,60 +1,91 @@
-
-
 [
   {
     "slug": "samambaia-2025",
     "name": "Samambaia 2025",
+    "location": "",
     "startDate": "2025-10-27",
     "endDate": "2025-11-01",
-    "isCurrent": false
+    "isCurrent": false,
+    "artistSignup": null
   },
   {
     "slug": "gama-2025",
     "name": "Gama 2025",
+    "location": "",
     "startDate": "2025-10-06",
     "endDate": "2025-10-11",
-    "isCurrent": false
+    "isCurrent": false,
+    "artistSignup": null
   },
   {
     "slug": "planaltina-2025",
     "name": "Planaltina 2025",
+    "location": "",
     "startDate": "2025-08-25",
     "endDate": "2025-08-30",
-    "isCurrent": false
+    "isCurrent": false,
+    "artistSignup": null
   },
   {
     "slug": "sao-sebastiao-2025",
     "name": "São Sebastião 2025",
+    "location": "",
     "startDate": "2025-07-21",
     "endDate": "2025-07-26",
-    "isCurrent": false
+    "isCurrent": false,
+    "artistSignup": null
   },
   {
     "slug": "ceilandia-2025",
     "name": "Ceilândia 2025",
+    "location": "",
     "startDate": "2025-11-24",
     "endDate": "2025-11-29",
-    "isCurrent": false
+    "isCurrent": false,
+    "artistSignup": null
   },
   {
     "slug": "cruzeiro-2025",
     "name": "Cruzeiro 2025",
+    "location": "",
     "startDate": "2025-12-15",
     "endDate": "2025-12-20",
-    "isCurrent": false
+    "isCurrent": false,
+    "artistSignup": null
   },
   {
     "slug": "brazlandia-2026",
     "name": "Brazlândia 2026",
+    "location": "",
     "startDate": "2026-01-26",
     "endDate": "2026-01-31",
-    "isCurrent": false
+    "isCurrent": false,
+    "artistSignup": null
   },
   {
     "slug": "santa-maria-2026",
     "name": "Santa Maria 2026",
+    "location": "",
     "startDate": "2026-02-23",
     "endDate": "2026-02-28",
-    "isCurrent": true
+    "isCurrent": false,
+    "artistSignup": {
+      "formUrl": "",
+      "startDate": "2026-02-23",
+      "endDate": "2026-02-28"
+    }
+  },
+  {
+    "slug": "riacho-fundo-1-2026",
+    "name": "Riacho Fundo I 2026",
+    "location": "Quadradão em frente ao Conselho Tutelar – Riacho Fundo I",
+    "startDate": "2026-03-09",
+    "endDate": "2026-03-14",
+    "isCurrent": true,
+    "artistSignup": {
+      "formUrl": "https://forms.gle/eEoP4dTqAseSTNdw8",
+      "startDate": "2026-03-02",
+      "endDate": "2026-03-08"
+    }
   }
 ]

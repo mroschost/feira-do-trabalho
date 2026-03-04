@@ -1,5 +1,3 @@
-
-
 {
   "samambaia-2025": [
     {
@@ -56,9 +54,6 @@
       "image": "https://www.egnews.com.br/arquivos/noticias/3801/feira-do-trabalho-e-do-campo-em-samambaia-vai-ate-sabado.jpg",
       "link": "https://www.egnews.com.br/noticia/3801/brasilia/df-politico/feira-do-trabalho-e-do-campo-em-samambaia-vai-ate-sabado.html"
     }
-
-
-
   ],
   "gama-2025": [
     {
@@ -191,7 +186,7 @@
       "link": "https://imprensapublica.com.br/brazlandia-realiza-7a-feira-do-trabalho-e-campo-com-muitas-vagas-e-cursos/"
     }
   ],
-  "santa-maria-2026":[
+  "santa-maria-2026": [
     {
       "title": "Feira do Trabalho e do Campo chega a Santa Maria",
       "summary": "Oitava edição do evento será realizada de 23 a 28 de fevereiro, atrás da administração regional da cidade",
@@ -204,5 +199,6 @@
       "image": "https://cdn.jornaldebrasilia.com.br/wp-content/uploads/2026/02/19152231/WhatsApp-Image-2026-02-19-at-14.59.12-620x620.jpeg",
       "link": "https://jornaldebrasilia.com.br/brasilia/8a-feira-do-trabalho-e-do-campo-em-santa-maria-de-23-a-28-de-fevereiro/"
     }
-  ]
+  ],
+  "riacho-fundo-1-2026": []
 }

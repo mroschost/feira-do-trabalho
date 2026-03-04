@@ -226,7 +226,7 @@ const HighlightsGrid = () => {
             </div>
           ) : (
             <div className="p-8 text-center bg-white shadow-lg rounded-xl">
-              <p className="text-gray-500">Destaques não disponíveis para esta edição</p>
+              <p className="text-gray-500">Cronograma ainda não definido para esta edição.</p>
             </div>
           )}
         </motion.div>
