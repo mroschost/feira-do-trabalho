@@ -1,7 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import Hero from '@/components/Hero';
-import ArtistSignup from '@/components/artistSignup';
+import ArtistSignup from '@/components/ArtistSignup';
 import Presentation from '@/components/Presentation';
 import RecentNews from '@/components/RecentNews';
 import HighlightsGrid from '@/components/HighLightsGrid';
