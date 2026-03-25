@@ -73,11 +73,16 @@ function createExampleScheduleDay() {
 function createExampleEdition() {
   return {
     slug: "",
-    title: "",
-    city: "",
+    name: "",
+    location: "",
     startDate: "",
     endDate: "",
-    isCurrent: false
+    isCurrent: false,
+    artistSignup: {
+      formUrl: "",
+      startDate: "",
+      endDate: ""
+    }
   };
 }
 

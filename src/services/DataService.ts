@@ -21,14 +21,6 @@ const __DATA__: Record<string, unknown> = (import.meta as any).glob("/src/data/*
   import: "default",
 }) as Record<string, unknown>;
 
-function loadJsonOr<T>(basename: string, fallback: T): T {
-  // procura por /src/data/<basename>.json
-  const key = Object.keys(__DATA__).find((k) => k.endsWith(`/${basename}.json`));
-  if (key && __DATA__[key] != null) {
-    return __DATA__[key] as T;
-  }
-  return fallback;
-}
 
 /**
  * Loader "obrigatório": garante que o app falha cedo caso o JSON não exista.
@@ -47,7 +39,7 @@ function requireJson<T>(basename: string): T {
 /**
  * Valida integridade mínima do editions.json:
  * - slug único
- * - no máximo 1 edição marcada como current
+ * - exatamente 1 edição marcada como current
  */
 function validateEditions(editions: Edition[]): void {
   const slugs = editions.map((e) => e.slug);
@@ -57,8 +49,10 @@ function validateEditions(editions: Edition[]): void {
   }
 
   const currentCount = editions.filter((e) => e.isCurrent).length;
-  if (currentCount > 1) {
-    throw new Error("[DataService] editions.json has more than one isCurrent=true");
+  if (currentCount !== 1) {
+    throw new Error(
+      `[DataService] editions.json must have exactly one isCurrent=true. Found: ${currentCount}`
+    );
   }
 }
 
