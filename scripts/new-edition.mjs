@@ -66,12 +66,13 @@ async function main() {
   const latestEdition = getLatestEdition(editions);
   const slugs = editions.map(e => e.slug);
 
-  // Apenas a edição com maior endDate fica destacada
+  // Apenas a edição com maior endDate fica marcada como atual
   for (const edition of editions) {
-    edition.featured = edition.slug === latestEdition.slug;
+    edition.isCurrent = edition.slug === latestEdition.slug;
+    delete edition.featured;
   }
 
-  // Persiste o editions.json atualizado
+  // Persiste o editions.json atualizado com isCurrent calculado dinamicamente
   await writeJson(EDITIONS_PATH, editions);
 
   const news = await readJson(NEWS_PATH);
@@ -102,7 +103,7 @@ async function main() {
     }
   }
 
-  console.log("[sync:editions] Sync concluído. Edição destacada:", latestEdition.slug);
+  console.log("[sync:editions] Sync concluído. Edição atual:", latestEdition.slug);
   if (created.news.length) console.log("Criado em news (com item de exemplo):", created.news);
   if (created.schedule.length) console.log("Criado em schedule:", created.schedule);
   if (created.folders.length) console.log("Pastas criadas:", created.folders);

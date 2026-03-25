@@ -13,7 +13,9 @@ import {
 } from "../types";
 
 // === JSON loader (Vite) ============================================
-// Coloque os arquivos em: /src/data/editions.json, /src/data/highlights.json, /src/data/schedule.json, /src/data/news.json
+// Fonte de verdade: /src/data/editions.json, /src/data/schedule.json, /src/data/news.json
+// Highlights agora são derivados da programação do dia.
+
 const __DATA__: Record<string, unknown> = (import.meta as any).glob("/src/data/*.json", {
   eager: true,
   import: "default",
@@ -125,6 +127,14 @@ function parseEditionSlugStrict(slug: string): { city: string; year: number } {
   return { city, year: Number(yearStr) };
 }
 
+function getTodayIsoLocalDate(): string {
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, "0");
+  const day = String(now.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
+
 // Varre imagens em: src/assets/images/editions/<editionSlug>/**/<arquivo>
 // Aceita extensões comuns em maiúsculas e minúsculas.
 
@@ -203,7 +213,7 @@ class DataService implements IDataService {
 
     // Destaques agora são derivados da programação do dia atual
     // Se não houver programação para hoje, usa o primeiro dia disponível.
-    const today = new Date().toISOString().split("T")[0];
+    const today = getTodayIsoLocalDate();
     const selectedDay =
       scheduleDays.find((d) => d.date === today) || scheduleDays[0];
 
