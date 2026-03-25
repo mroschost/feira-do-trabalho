@@ -81,11 +81,24 @@
     "location": "Quadradão em frente ao Conselho Tutelar – Riacho Fundo I",
     "startDate": "2026-03-09",
     "endDate": "2026-03-14",
-    "isCurrent": true,
+    "isCurrent": false,
     "artistSignup": {
       "formUrl": "https://forms.gle/eEoP4dTqAseSTNdw8",
       "startDate": "2026-03-02",
       "endDate": "2026-03-08"
+    }
+  },
+  {
+    "slug": "taguatinga-2026",
+    "name": "Taguatinga 2026",
+    "location": "Taguaparque, Praça do Respeito – Taguatinga",
+    "startDate": "2026-03-23",
+    "endDate": "2026-03-28",
+    "isCurrent": true,
+    "artistSignup": {
+      "formUrl": "https://forms.gle/t9qMQxubVE4reYHdA",
+      "startDate": "2026-03-18",
+      "endDate": "2026-03-23"
     }
   }
 ]
