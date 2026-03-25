@@ -61,6 +61,30 @@ function validateEditions(editions: Edition[]): void {
     throw new Error("[DataService] editions.json has more than one isCurrent=true");
   }
 }
+
+function isRealEdition(edition: Edition | null | undefined): edition is Edition {
+  return !!edition && typeof edition.slug === "string" && edition.slug.trim() !== "";
+}
+
+function isRealScheduleItem(item: any): boolean {
+  if (!item || typeof item !== "object") return false;
+  const time = typeof item.time === "string" ? item.time.trim() : "";
+  const title = typeof item.title === "string" ? item.title.trim() : "";
+  return time !== "" || title !== "";
+}
+
+function isRealScheduleDay(day: any): boolean {
+  if (!day || typeof day !== "object") return false;
+  const date = typeof day.date === "string" ? day.date.trim() : "";
+  const items = Array.isArray(day.items) ? day.items.filter(isRealScheduleItem) : [];
+  return date !== "" || items.length > 0;
+}
+
+function isRealNewsItem(item: any): boolean {
+  if (!item || typeof item !== "object") return false;
+  const link = typeof item.link === "string" ? item.link.trim() : "";
+  return link.length > 0;
+}
 // ================================================================
 
 // Função para criar deep copy congelada
@@ -91,7 +115,8 @@ function validateEditionSlug(slug: string): EditionSlug {
 }
 
 // Fonte de verdade: /src/data/editions.json (obrigatório)
-const EDITIONS: Edition[] = requireJson<Edition[]>("editions");
+const RAW_EDITIONS: Edition[] = requireJson<Edition[]>("editions");
+const EDITIONS: Edition[] = RAW_EDITIONS.filter(isRealEdition);
 validateEditions(EDITIONS);
 // Conjunto pré-computado de slugs válidos (evita recriar Set a cada chamada)
 const VALID_SLUGS = new Set<EditionSlug>(
@@ -209,7 +234,9 @@ class DataService implements IDataService {
 
   getHighlights(edition: EditionSlug): Readonly<Highlights> {
     const validatedSlug = validateEditionSlug(edition);
-    const scheduleDays = SCHEDULE_DATA[validatedSlug] || [];
+    const scheduleDays = copyArr(SCHEDULE_DATA[validatedSlug] || [])
+      .map((d) => ({ ...d, items: copyArr(d.items).filter(isRealScheduleItem) }))
+      .filter(isRealScheduleDay);
 
     // Destaques agora são derivados da programação do dia atual
     // Se não houver programação para hoje, usa o primeiro dia disponível.
@@ -239,10 +266,13 @@ class DataService implements IDataService {
 
   getSchedule(edition: EditionSlug): Readonly<Schedule> {
     const validatedSlug = validateEditionSlug(edition);
-    const days = SCHEDULE_DATA[validatedSlug] || [];
+    const days = copyArr(SCHEDULE_DATA[validatedSlug] || [])
+      .map((d) => ({ ...d, items: copyArr(d.items).filter(isRealScheduleItem) }))
+      .filter(isRealScheduleDay);
+
     return deepFreeze({
       edition: validatedSlug,
-      days: copyArr(days).map((d) => ({ ...d, items: copyArr(d.items) })),
+      days,
     });
   }
 
@@ -261,11 +291,8 @@ class DataService implements IDataService {
     const validatedSlug = validateEditionSlug(edition);
     const items = NEWS_DATA[validatedSlug] || [];
 
-    // Remove placeholders/exemplos: notícia sem link válido não deve ser exibida
-    const filtered = items.filter((item) => {
-      const link = (item as any)?.link;
-      return typeof link === "string" && link.trim().length > 0;
-    });
+    // Remove placeholders/exemplos
+    const filtered = items.filter(isRealNewsItem);
 
     // Retorna em ordem invertida (sem mutar a origem)
     const reversed = [...filtered].reverse();

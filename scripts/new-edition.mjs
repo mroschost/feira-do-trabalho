@@ -56,24 +56,53 @@ function createExampleNewsItem() {
   };
 }
 
+function createExampleScheduleItem() {
+  return {
+    time: "",
+    title: ""
+  };
+}
+
+function createExampleScheduleDay() {
+  return {
+    date: "",
+    items: [createExampleScheduleItem()]
+  };
+}
+
+function createExampleEdition() {
+  return {
+    slug: "",
+    title: "",
+    city: "",
+    startDate: "",
+    endDate: "",
+    isCurrent: false
+  };
+}
+
 async function main() {
   const editions = await readJson(EDITIONS_PATH);
 
-  if (!Array.isArray(editions) || editions.length === 0) {
+  // Remove qualquer edição de exemplo anterior (slug vazio)
+  const realEditions = editions.filter(e => e.slug && e.slug.trim() !== "");
+
+  if (!Array.isArray(realEditions) || realEditions.length === 0) {
     throw new Error("editions.json inválido.");
   }
 
-  const latestEdition = getLatestEdition(editions);
-  const slugs = editions.map(e => e.slug);
+  const latestEdition = getLatestEdition(realEditions);
+  const slugs = realEditions.map(e => e.slug);
 
   // Apenas a edição com maior endDate fica marcada como atual
-  for (const edition of editions) {
+  for (const edition of realEditions) {
     edition.isCurrent = edition.slug === latestEdition.slug;
     delete edition.featured;
   }
 
-  // Persiste o editions.json atualizado com isCurrent calculado dinamicamente
-  await writeJson(EDITIONS_PATH, editions);
+  // Reinsere o objeto de exemplo no final
+  const finalEditions = [...realEditions, createExampleEdition()];
+  await writeJson(EDITIONS_PATH, finalEditions);
 
   const news = await readJson(NEWS_PATH);
   const schedule = await readJson(SCHEDULE_PATH);
@@ -81,14 +110,36 @@ async function main() {
   const created = { news: [], schedule: [], folders: [] };
 
   for (const slug of slugs) {
-    if (!Array.isArray(news[slug]) || news[slug].length === 0) {
-      news[slug] = [createExampleNewsItem()];
+    if (!Array.isArray(news[slug])) {
+      news[slug] = [];
       created.news.push(slug);
     }
-    if (!schedule[slug]) {
+    if (!Array.isArray(schedule[slug])) {
       schedule[slug] = [];
       created.schedule.push(slug);
     }
+
+    // Remove placeholder anterior e garante um novo no final
+    const realNews = news[slug].filter((item) => {
+      if (!item || typeof item !== "object") return false;
+      return [item.title, item.summary, item.image, item.link].some(
+        (value) => typeof value === "string" && value.trim() !== ""
+      );
+    });
+    news[slug] = [...realNews, createExampleNewsItem()];
+
+    const realSchedule = schedule[slug].filter((day) => {
+      if (!day || typeof day !== "object") return false;
+      const hasDate = typeof day.date === "string" && day.date.trim() !== "";
+      const hasItems = Array.isArray(day.items) && day.items.some((item) => {
+        if (!item || typeof item !== "object") return false;
+        return [item.time, item.title].some(
+          (value) => typeof value === "string" && value.trim() !== ""
+        );
+      });
+      return hasDate || hasItems;
+    });
+    schedule[slug] = [...realSchedule, createExampleScheduleDay()];
   }
 
   await writeJson(NEWS_PATH, news);
