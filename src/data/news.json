@@ -165,7 +165,14 @@
       "link": "https://www.correiobraziliense.com.br/cidades-df/2025/12/amp/7304340-feira-do-trabalho-e-do-campo-em-ceilandia-abre-programacao-confira.html"
     }
   ],
-  "cruzeiro-2025": [],
+  "cruzeiro-2025": [
+    {
+      "title": "",
+      "summary": "",
+      "image": "",
+      "link": ""
+    }
+  ],
   "brazlandia-2026": [
     {
       "title": "Brazlândia recebe 7ª Feira do Trabalho e do Campo com vagas e qualificação",
@@ -200,6 +207,26 @@
       "link": "https://jornaldebrasilia.com.br/brasilia/8a-feira-do-trabalho-e-do-campo-em-santa-maria-de-23-a-28-de-fevereiro/"
     }
   ],
-  "riacho-fundo-1-2026": [],
-  "taguatinga-2026": []
+  "riacho-fundo-1-2026": [
+    {
+      "title": "",
+      "summary": "",
+      "image": "",
+      "link": ""
+    }
+  ],
+  "taguatinga-2026": [
+    {
+      "title": "Feira do Trabalho e do Campo oferece qualificação e serviços gratuitos no Taguaparque",
+      "summary": "De 23 a 28 de março, o Taguaparque recebe a Feira do Trabalho e do Campo, um evento gratuito dedicado à qualificação profissional, geração de renda e fortalecimento da economia local. A programação ocorre diariamente das 13h às 21h e inclui exposições de produtos rurais e artesanato, reunindo produtores e empreendedores da região. A iniciativa visa incentivar o consumo local e promover oportunidades de negócios.",
+      "image": "https://cdn.jornaldebrasilia.com.br/wp-content/uploads/2026/03/23122410/feira-do-trabalho-1-620x620.jpeg",
+      "link": "https://jornaldebrasilia.com.br/brasilia/feira-do-trabalho-e-do-campo-oferece-qualificacao-e-servicos-gratuitos-no-taguaparque/"
+    },
+    {
+      "title": "Feira do Trabalho e do Campo leva qualificação e serviços gratuitos ao Taguaparque",
+      "summary": "Entre os dias 23 e 28 de março de 2026, o Taguaparque, recebe a Feira do Trabalho e do Campo, evento gratuito voltado à qualificação profissional, geração de renda e fortalecimento da economia local.\nCom programação diária das 13h às 21h, a feira conta com exposição de produtos rurais e artesanato, reunindo produtores e empreendedores da região. A iniciativa busca incentivar o consumo local e promover oportunidades de negócios.",
+      "image": "https://www.semcensurabsb.com.br/wp-content/uploads/sites/44/2026/03/WhatsApp-Image-2026-03-23-at-10.15.51.jpeg",
+      "link": "https://www.semcensurabsb.com.br/2026/03/23/feira-do-trabalho-e-do-campo-leva-qualificacao-e-servicos-gratuitos-ao-taguaparque/"
+    }
+  ]
 }

@@ -6,7 +6,8 @@
     "startDate": "2025-10-27",
     "endDate": "2025-11-01",
     "isCurrent": false,
-    "artistSignup": null
+    "artistSignup": null,
+    "featured": false
   },
   {
     "slug": "gama-2025",
@@ -15,7 +16,8 @@
     "startDate": "2025-10-06",
     "endDate": "2025-10-11",
     "isCurrent": false,
-    "artistSignup": null
+    "artistSignup": null,
+    "featured": false
   },
   {
     "slug": "planaltina-2025",
@@ -24,7 +26,8 @@
     "startDate": "2025-08-25",
     "endDate": "2025-08-30",
     "isCurrent": false,
-    "artistSignup": null
+    "artistSignup": null,
+    "featured": false
   },
   {
     "slug": "sao-sebastiao-2025",
@@ -33,7 +36,8 @@
     "startDate": "2025-07-21",
     "endDate": "2025-07-26",
     "isCurrent": false,
-    "artistSignup": null
+    "artistSignup": null,
+    "featured": false
   },
   {
     "slug": "ceilandia-2025",
@@ -42,7 +46,8 @@
     "startDate": "2025-11-24",
     "endDate": "2025-11-29",
     "isCurrent": false,
-    "artistSignup": null
+    "artistSignup": null,
+    "featured": false
   },
   {
     "slug": "cruzeiro-2025",
@@ -51,7 +56,8 @@
     "startDate": "2025-12-15",
     "endDate": "2025-12-20",
     "isCurrent": false,
-    "artistSignup": null
+    "artistSignup": null,
+    "featured": false
   },
   {
     "slug": "brazlandia-2026",
@@ -60,7 +66,8 @@
     "startDate": "2026-01-26",
     "endDate": "2026-01-31",
     "isCurrent": false,
-    "artistSignup": null
+    "artistSignup": null,
+    "featured": false
   },
   {
     "slug": "santa-maria-2026",
@@ -73,7 +80,8 @@
       "formUrl": "",
       "startDate": "2026-02-23",
       "endDate": "2026-02-28"
-    }
+    },
+    "featured": false
   },
   {
     "slug": "riacho-fundo-1-2026",
@@ -86,12 +94,13 @@
       "formUrl": "https://forms.gle/eEoP4dTqAseSTNdw8",
       "startDate": "2026-03-02",
       "endDate": "2026-03-08"
-    }
+    },
+    "featured": false
   },
   {
     "slug": "taguatinga-2026",
     "name": "Taguatinga 2026",
-    "location": "Taguaparque, Praça do Respeito – Taguatinga-DF",
+    "location": "Taguaparque (Praça do Respeito) – Taguatinga-DF",
     "startDate": "2026-03-23",
     "endDate": "2026-03-28",
     "isCurrent": true,
@@ -99,6 +108,7 @@
       "formUrl": "https://forms.gle/t9qMQxubVE4reYHdA",
       "startDate": "2026-03-18",
       "endDate": "2026-03-23"
-    }
+    },
+    "featured": true
   }
 ]

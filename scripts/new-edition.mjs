@@ -29,15 +29,31 @@ async function fileExists(p) {
   }
 }
 
-function validateSingleCurrent(editions) {
-  const current = editions.filter(e => e.isCurrent === true);
-  if (current.length !== 1) {
-    const list = current.map(e => e.slug).join(", ");
-    throw new Error(
-      `Deve existir exatamente 1 edição com isCurrent=true. Encontrado: ${current.length} (${list})`
-    );
+function getLatestEdition(editions) {
+  if (!Array.isArray(editions) || editions.length === 0) {
+    throw new Error("editions.json must contain at least one edition");
   }
-  return current[0];
+
+  const latest = [...editions].sort((a, b) => {
+    const aDate = new Date(a.endDate).getTime();
+    const bDate = new Date(b.endDate).getTime();
+    return bDate - aDate;
+  })[0];
+
+  if (!latest?.slug) {
+    throw new Error("Could not determine latest edition from editions.json");
+  }
+
+  return latest;
+}
+
+function createExampleNewsItem() {
+  return {
+    title: "",
+    summary: "",
+    image: "",
+    link: ""
+  };
 }
 
 async function main() {
@@ -47,8 +63,16 @@ async function main() {
     throw new Error("editions.json inválido.");
   }
 
-  const current = validateSingleCurrent(editions);
+  const latestEdition = getLatestEdition(editions);
   const slugs = editions.map(e => e.slug);
+
+  // Apenas a edição com maior endDate fica destacada
+  for (const edition of editions) {
+    edition.featured = edition.slug === latestEdition.slug;
+  }
+
+  // Persiste o editions.json atualizado
+  await writeJson(EDITIONS_PATH, editions);
 
   const news = await readJson(NEWS_PATH);
   const schedule = await readJson(SCHEDULE_PATH);
@@ -56,8 +80,8 @@ async function main() {
   const created = { news: [], schedule: [], folders: [] };
 
   for (const slug of slugs) {
-    if (!news[slug]) {
-      news[slug] = [];
+    if (!Array.isArray(news[slug]) || news[slug].length === 0) {
+      news[slug] = [createExampleNewsItem()];
       created.news.push(slug);
     }
     if (!schedule[slug]) {
@@ -78,8 +102,8 @@ async function main() {
     }
   }
 
-  console.log("[sync:editions] Sync concluído. Edição atual:", current.slug);
-  if (created.news.length) console.log("Criado em news:", created.news);
+  console.log("[sync:editions] Sync concluído. Edição destacada:", latestEdition.slug);
+  if (created.news.length) console.log("Criado em news (com item de exemplo):", created.news);
   if (created.schedule.length) console.log("Criado em schedule:", created.schedule);
   if (created.folders.length) console.log("Pastas criadas:", created.folders);
 }
