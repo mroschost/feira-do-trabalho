@@ -63,11 +63,37 @@ function createExampleScheduleItem() {
   };
 }
 
-function createExampleScheduleDay() {
+function createExampleScheduleDay(date = "") {
   return {
-    date: "",
-    items: [createExampleScheduleItem()]
+    date,
+    items: [
+      createExampleScheduleItem(),
+      createExampleScheduleItem(),
+      createExampleScheduleItem(),
+      createExampleScheduleItem()
+    ]
   };
+}
+
+function formatIsoDate(date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
+
+function createExampleScheduleForEdition(edition) {
+  const start = new Date(`${edition.startDate}T00:00:00`);
+
+  if (Number.isNaN(start.getTime())) {
+    return Array.from({ length: 6 }, () => createExampleScheduleDay(""));
+  }
+
+  return Array.from({ length: 6 }, (_, index) => {
+    const current = new Date(start);
+    current.setDate(start.getDate() + index);
+    return createExampleScheduleDay(formatIsoDate(current));
+  });
 }
 
 function createExampleEdition() {
@@ -144,7 +170,12 @@ async function main() {
       });
       return hasDate || hasItems;
     });
-    schedule[slug] = [...realSchedule, createExampleScheduleDay()];
+    const edition = realEditions.find((e) => e.slug === slug);
+    const placeholderSchedule = edition
+      ? createExampleScheduleForEdition(edition)
+      : Array.from({ length: 6 }, () => createExampleScheduleDay(""));
+
+    schedule[slug] = [...realSchedule, ...placeholderSchedule];
   }
 
   await writeJson(NEWS_PATH, news);
