@@ -1,5 +1,6 @@
 import { promises as fs } from "fs";
 import path from "path";
+import crypto from "crypto";
 
 const ROOT = process.cwd();
 
@@ -8,8 +9,33 @@ const NEWS_PATH = path.join(ROOT, "src/data/news.json");
 const SCHEDULE_PATH = path.join(ROOT, "src/data/schedule.json");
 const EDITIONS_IMAGES_DIR = path.join(ROOT, "src/assets/images/editions");
 
+function removeTrailingCommas(text) {
+  return text.replace(/,\s*([}\]])/g, "$1");
+}
+
+function sanitizeJsonText(text) {
+  return removeTrailingCommas(text).replace(/^\uFEFF/, "").trim();
+}
+
 async function readJson(file) {
-  return JSON.parse(await fs.readFile(file, "utf-8"));
+  const raw = await fs.readFile(file, "utf-8");
+
+  try {
+    return JSON.parse(raw);
+  } catch {
+    const sanitized = sanitizeJsonText(raw);
+    try {
+      const parsed = JSON.parse(sanitized);
+
+      // Persiste a versão reparada para manter os JSONs consistentes no repositório
+      await writeJson(file, parsed);
+      console.warn(`[sync:editions] JSON sanitizado e persistido automaticamente: ${file}`);
+
+      return parsed;
+    } catch (error) {
+      throw new Error(`Falha ao ler JSON em ${file}: ${error.message}`);
+    }
+  }
 }
 
 async function writeJson(file, data) {
@@ -26,6 +52,80 @@ async function fileExists(p) {
     return true;
   } catch {
     return false;
+  }
+}
+
+function isImageFile(fileName) {
+  return /\.(jpg|jpeg|png|webp|avif)$/i.test(fileName);
+}
+
+async function getFileHash(filePath) {
+  const buffer = await fs.readFile(filePath);
+  return crypto.createHash("sha1").update(buffer).digest("hex");
+}
+
+function getSequentialGalleryIndex(fileName, slug) {
+  const escapedSlug = slug.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const match = fileName.match(new RegExp(`^${escapedSlug}-(\\d+)\\.[^.]+$`, "i"));
+  return match ? Number(match[1]) : null;
+}
+
+function buildSequentialGalleryName(slug, index, ext) {
+  return `${slug}-${index}${ext.toLowerCase()}`;
+}
+
+async function normalizeEditionImages(slug) {
+  const dir = path.join(EDITIONS_IMAGES_DIR, slug);
+  if (!(await fileExists(dir))) return;
+
+  const entries = await fs.readdir(dir, { withFileTypes: true });
+  const imageFiles = entries
+    .filter((entry) => entry.isFile() && isImageFile(entry.name))
+    .map((entry) => entry.name)
+    .sort((a, b) => a.localeCompare(b));
+
+  const seenHashes = new Map();
+  const keptFiles = [];
+
+  for (const fileName of imageFiles) {
+    const absolutePath = path.join(dir, fileName);
+    const hash = await getFileHash(absolutePath);
+
+    if (seenHashes.has(hash)) {
+      await fs.unlink(absolutePath);
+      console.log(`[dedupe] [${slug}] removida duplicada: ${fileName} (igual a ${seenHashes.get(hash)})`);
+      continue;
+    }
+
+    seenHashes.set(hash, fileName);
+    keptFiles.push(fileName);
+  }
+
+  const existingStandardIndexes = keptFiles
+    .map((fileName) => getSequentialGalleryIndex(fileName, slug))
+    .filter((index) => index !== null)
+    .sort((a, b) => a - b);
+
+  let nextIndex = existingStandardIndexes.length
+    ? existingStandardIndexes[existingStandardIndexes.length - 1] + 1
+    : 1;
+
+  const nonStandardFiles = keptFiles.filter(
+    (fileName) => getSequentialGalleryIndex(fileName, slug) === null
+  );
+
+  for (const fileName of nonStandardFiles) {
+    const ext = path.extname(fileName);
+    let newName = buildSequentialGalleryName(slug, nextIndex, ext);
+
+    while (await fileExists(path.join(dir, newName))) {
+      nextIndex += 1;
+      newName = buildSequentialGalleryName(slug, nextIndex, ext);
+    }
+
+    await fs.rename(path.join(dir, fileName), path.join(dir, newName));
+    console.log(`[rename] [${slug}] ${fileName} → ${newName}`);
+    nextIndex += 1;
   }
 }
 
@@ -188,6 +288,8 @@ async function main() {
       await fs.writeFile(path.join(dir, ".gitkeep"), "");
       created.folders.push(slug);
     }
+
+    await normalizeEditionImages(slug);
   }
 
   console.log("[sync:editions] Sync concluído. Edição atual:", latestEdition.slug);
