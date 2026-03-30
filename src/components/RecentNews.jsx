@@ -57,7 +57,7 @@ const RecentNews = () => {
               >
                 <div className="relative overflow-hidden">
                   <img
-                    class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
+                    className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
                     alt={`Imagem da notícia: ${item.title}`}
                    src={item.image}/>
                   <div className="absolute p-2 rounded-full top-4 right-4 bg-white/90 backdrop-blur-sm">

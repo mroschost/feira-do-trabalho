@@ -184,16 +184,21 @@ function formatIsoDate(date) {
 
 function createExampleScheduleForEdition(edition) {
   const start = new Date(`${edition.startDate}T00:00:00`);
+  const end = new Date(`${edition.endDate}T00:00:00`);
 
-  if (Number.isNaN(start.getTime())) {
-    return Array.from({ length: 6 }, () => createExampleScheduleDay(""));
+  if (Number.isNaN(start.getTime()) || Number.isNaN(end.getTime()) || end < start) {
+    return [];
   }
 
-  return Array.from({ length: 6 }, (_, index) => {
-    const current = new Date(start);
-    current.setDate(start.getDate() + index);
-    return createExampleScheduleDay(formatIsoDate(current));
-  });
+  const days = [];
+  const current = new Date(start);
+
+  while (current <= end) {
+    days.push(createExampleScheduleDay(formatIsoDate(current)));
+    current.setDate(current.getDate() + 1);
+  }
+
+  return days;
 }
 
 function createExampleEdition() {
@@ -246,7 +251,10 @@ async function main() {
       created.news.push(slug);
     }
     if (!Array.isArray(schedule[slug])) {
-      schedule[slug] = [];
+      const edition = realEditions.find((e) => e.slug === slug);
+      schedule[slug] = edition
+        ? createExampleScheduleForEdition(edition)
+        : [];
       created.schedule.push(slug);
     }
 
@@ -258,24 +266,6 @@ async function main() {
       );
     });
     news[slug] = [...realNews, createExampleNewsItem()];
-
-    const realSchedule = schedule[slug].filter((day) => {
-      if (!day || typeof day !== "object") return false;
-      const hasDate = typeof day.date === "string" && day.date.trim() !== "";
-      const hasItems = Array.isArray(day.items) && day.items.some((item) => {
-        if (!item || typeof item !== "object") return false;
-        return [item.time, item.title].some(
-          (value) => typeof value === "string" && value.trim() !== ""
-        );
-      });
-      return hasDate || hasItems;
-    });
-    const edition = realEditions.find((e) => e.slug === slug);
-    const placeholderSchedule = edition
-      ? createExampleScheduleForEdition(edition)
-      : Array.from({ length: 6 }, () => createExampleScheduleDay(""));
-
-    schedule[slug] = [...realSchedule, ...placeholderSchedule];
   }
 
   await writeJson(NEWS_PATH, news);
