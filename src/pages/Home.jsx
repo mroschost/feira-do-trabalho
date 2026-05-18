@@ -10,15 +10,15 @@ const Home = () => {
   return (
     <>
       <Helmet>
-        <title>Feira do Trabalho e do Campo - 11ª edição Água Quente</title>
+        <title>Feira do Trabalho e do Campo - DF</title>
         <meta 
           name="description" 
-          content="Feira do Trabalho e do Campo - 11ª edição Água Quente, de 12 a 17 de maio de 2026, das 13h às 21h." 
+          content="Feira do Trabalho e do Campo - DF, de 12 a 17 de maio de 2026, em Água Quente-DF." 
         />
-        <meta property="og:title" content="Feira do Trabalho e do Campo - 11ª edição Água Quente" />
+        <meta property="og:title" content="Feira do Trabalho e do Campo - DF" />
         <meta 
           property="og:description" 
-          content="De 12 a 17 de maio de 2026, das 13h às 21h, em Água Quente." 
+          content="De 12 a 17 de maio de 2026, em Água Quente-DF." 
         />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://feiradotrabalhoedocampodf.com/" />
