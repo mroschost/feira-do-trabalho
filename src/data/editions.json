@@ -94,6 +94,19 @@
     "location": "Taguaparque (Praça do Respeito) – Taguatinga-DF",
     "startDate": "2026-03-23",
     "endDate": "2026-03-28",
+    "isCurrent": false,
+    "artistSignup": {
+      "formUrl": "https://forms.gle/t9qMQxubVE4reYHdA",
+      "startDate": "2026-03-18",
+      "endDate": "2026-03-23"
+    }
+  },
+  {
+    "slug": "agua-quente-2026",
+    "name": "Feira do Trabalho e do Campo - 11ª edição Água Quente",
+    "location": "Água Quente-DF",
+    "startDate": "2026-05-12",
+    "endDate": "2026-05-17",
     "isCurrent": true,
     "artistSignup": {
       "formUrl": "https://forms.gle/t9qMQxubVE4reYHdA",

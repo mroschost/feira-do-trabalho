@@ -1,6 +1,6 @@
 import React from "react";
 import { motion, useReducedMotion } from "framer-motion";
-import { Calendar, MapPin } from "lucide-react";
+import { Calendar, Clock, MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
 import heroMb1 from "@/assets/images/hero_mb_1.jpeg";
 import heroMb2 from "@/assets/images/hero_mb_2.jpeg";
@@ -83,6 +83,7 @@ const Hero = () => {
   };
 
   const DATE = formatHeroDate(currentEdition?.startDate, currentEdition?.endDate);
+  const TIME = "13h às 21h";
 
 
 
@@ -116,10 +117,10 @@ const Hero = () => {
              text-gray-900 bg-gradient-to-b from-gray-700 to-gray-500 bg-clip-text text-transparent
              drop-shadow-[0_1px_0_rgba(255,255,255,0.6)]"
             >
-              Feira do Trabalho e
+              Feira do Trabalho e do Campo
               <br />
               <span className="text-[#3FA637] drop-shadow-[0_1px_0_rgba(255,255,255,0.6)]">
-                do Campo DF
+                11ª edição Água Quente
               </span>
             </motion.h1>
 
@@ -149,6 +150,19 @@ const Hero = () => {
                      drop-shadow-[0_1px_0_rgba(255,255,255,0.7)]"
                 >
                   {DATE}
+                </span>
+              </div>
+
+              <div className="flex items-center justify-center gap-3 px-6 py-3 rounded-full shadow-sm bg-white/70 backdrop-blur-sm ring-1 ring-black/5 w-full sm:w-[520px]">
+                <Clock
+                  className="w-6 h-6 text-[#3FA637]"
+                  aria-hidden="true"
+                />
+                <span
+                  className="text-lg font-medium text-gray-900
+                     drop-shadow-[0_1px_0_rgba(255,255,255,0.7)]"
+                >
+                  {TIME}
                 </span>
               </div>
 
@@ -217,9 +231,9 @@ const Hero = () => {
             {...fadeUp(0)}
             className="mb-4 text-3xl font-bold leading-tight"
           >
-            Feira do Trabalho
+            Feira do Trabalho e do Campo
             <br />
-            <span className="text-[#3FA637]">e do Campo DF</span>
+            <span className="text-[#3FA637]">11ª edição Água Quente</span>
           </motion.h1>
 
           <motion.p {...fadeUp(0.2)} className="mb-6 text-lg text-gray-600">
@@ -235,6 +249,11 @@ const Hero = () => {
             <div className="flex items-center justify-center gap-3 px-5 py-3 rounded-full shadow-sm bg-white/70 backdrop-blur-sm ring-1 ring-black/5 w-full max-w-[520px]">
               <Calendar className="h-5 w-5 text-[#3FA637]" aria-hidden="true" />
               <span className="font-medium text-gray-900">{DATE}</span>
+            </div>
+
+            <div className="flex items-center justify-center gap-3 px-5 py-3 rounded-full shadow-sm bg-white/70 backdrop-blur-sm ring-1 ring-black/5 w-full max-w-[520px]">
+              <Clock className="h-5 w-5 text-[#3FA637]" aria-hidden="true" />
+              <span className="font-medium text-gray-900">{TIME}</span>
             </div>
 
             {/* Local (chip) */}
