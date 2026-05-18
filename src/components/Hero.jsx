@@ -116,8 +116,10 @@ const Hero = () => {
              text-gray-900 bg-gradient-to-b from-gray-700 to-gray-500 bg-clip-text text-transparent
              drop-shadow-[0_1px_0_rgba(255,255,255,0.6)]"
             >
+              Feira do Trabalho e
+              <br />
               <span className="text-[#3FA637] drop-shadow-[0_1px_0_rgba(255,255,255,0.6)]">
-                Feira do Trabalho e do Campo - DF
+                do Campo DF
               </span>
             </motion.h1>
 
@@ -215,7 +217,9 @@ const Hero = () => {
             {...fadeUp(0)}
             className="mb-4 text-3xl font-bold leading-tight"
           >
-            <span className="text-[#3FA637]">Feira do Trabalho e do Campo - DF</span>
+            Feira do Trabalho e
+            <br />
+            <span className="text-[#3FA637]">do Campo DF</span>
           </motion.h1>
 
           <motion.p {...fadeUp(0.2)} className="mb-6 text-lg text-gray-600">
