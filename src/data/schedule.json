@@ -4633,5 +4633,101 @@
         }
       ]
     }
+  ],
+  "taguatinga-2026": [
+    {
+      "date": "2026-03-23",
+      "items": [
+        {
+          "time": "13:00-21:00",
+          "title": "Visitação aberta"
+        }
+      ]
+    },
+    {
+      "date": "2026-03-24",
+      "items": [
+        {
+          "time": "13:00-21:00",
+          "title": "Feira de produtos rurais e artesanato"
+        },
+        {
+          "time": "14:00-16:00",
+          "title": "Oficina: Reaproveitamento e Upcycling"
+        },
+        {
+          "time": "16:00-18:00",
+          "title": "Oficina: Precificação para Pequenos Negócios"
+        }
+      ]
+    },
+    {
+      "date": "2026-03-25",
+      "items": [
+        {
+          "time": "13:00-21:00",
+          "title": "Feira de produtos rurais e artesanato"
+        },
+        {
+          "time": "14:00-16:00",
+          "title": "Oficina: Feiras Solidárias"
+        },
+        {
+          "time": "16:00-17:00",
+          "title": "Palestra: Justiça Social no fazer econômico"
+        }
+      ]
+    },
+    {
+      "date": "2026-03-26",
+      "items": [
+        {
+          "time": "13:00-21:00",
+          "title": "Feira de produtos rurais e artesanato"
+        },
+        {
+          "time": "14:00-16:00",
+          "title": "Oficina: Embalagem Sustentável"
+        },
+        {
+          "time": "18:00-20:00",
+          "title": "Oficina: Fotografia pelo Celular"
+        }
+      ]
+    },
+    {
+      "date": "2026-03-27",
+      "items": [
+        {
+          "time": "13:00-21:00",
+          "title": "Feira de produtos rurais e artesanato"
+        },
+        {
+          "time": "14:00-16:00",
+          "title": "Oficina: Tecnologias Sociais Locais"
+        },
+        {
+          "time": "18:00-19:00",
+          "title": "Palestra: Diversidade no Empreendedorismo Popular"
+        }
+      ]
+    },
+    {
+      "date": "2026-03-28",
+      "items": [
+        {
+          "time": "13:00-21:00",
+          "title": "Feira de produtos rurais e artesanato"
+        },
+        {
+          "time": "14:00-15:00",
+          "title": "Entrega de certificados"
+        },
+        {
+          "time": "15:00-17:00",
+          "title": "Apresentações artísticas"
+        }
+      ]
+    }
   ]
 }
