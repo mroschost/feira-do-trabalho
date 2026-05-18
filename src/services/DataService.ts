@@ -69,9 +69,8 @@ function isRealScheduleItem(item: any): boolean {
 
 function isRealScheduleDay(day: any): boolean {
   if (!day || typeof day !== "object") return false;
-  const date = typeof day.date === "string" ? day.date.trim() : "";
   const items = Array.isArray(day.items) ? day.items.filter(isRealScheduleItem) : [];
-  return date !== "" || items.length > 0;
+  return items.length > 0;
 }
 
 function isRealNewsItem(item: any): boolean {
