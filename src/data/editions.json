@@ -107,12 +107,21 @@
     "location": "Água Quente-DF",
     "startDate": "2026-05-12",
     "endDate": "2026-05-17",
-    "isCurrent": true,
+    "isCurrent": false,
     "artistSignup": {
       "formUrl": "https://forms.gle/t9qMQxubVE4reYHdA",
       "startDate": "2026-03-18",
       "endDate": "2026-03-23"
     }
+  },
+  {
+    "slug": "feira-da-torre-2026",
+    "name": "Última edição - Feira da Torre",
+    "location": "Feira da Torre – Brasília-DF",
+    "startDate": "2026-06-30",
+    "endDate": "2026-07-05",
+    "isCurrent": true,
+    "artistSignup": null
   },
   {
     "slug": "",
