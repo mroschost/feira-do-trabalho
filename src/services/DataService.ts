@@ -14,6 +14,7 @@ import {
 
 // === JSON loader (Vite) ============================================
 // Fonte de verdade: /src/data/editions.json, /src/data/schedule.json, /src/data/news.json
+// schedule-overrides.json pode sobrescrever/adicionar programações pontuais sem mexer no arquivo grande.
 // Highlights agora são derivados da programação do dia.
 
 const __DATA__: Record<string, unknown> = (import.meta as any).glob("/src/data/*.json", {
@@ -33,6 +34,16 @@ function requireJson<T>(basename: string): T {
       `[DataService] Missing required data file: /src/data/${basename}.json`
     );
   }
+  return __DATA__[key] as T;
+}
+
+/**
+ * Loader opcional: permite criar arquivos de override sem quebrar o app
+ * quando eles ainda não existirem.
+ */
+function optionalJson<T>(basename: string, fallback: T): T {
+  const key = Object.keys(__DATA__).find((k) => k.endsWith(`/${basename}.json`));
+  if (!key || __DATA__[key] == null) return fallback;
   return __DATA__[key] as T;
 }
 
@@ -117,9 +128,18 @@ const VALID_SLUGS = new Set<EditionSlug>(
 );
 
 
-const SCHEDULE_DATA: Record<EditionSlug, ScheduleDay[]> = requireJson<
+const BASE_SCHEDULE_DATA: Record<EditionSlug, ScheduleDay[]> = requireJson<
   Record<EditionSlug, ScheduleDay[]>
 >("schedule");
+
+const SCHEDULE_OVERRIDES: Record<EditionSlug, ScheduleDay[]> = optionalJson<
+  Record<EditionSlug, ScheduleDay[]>
+>("schedule-overrides", {} as Record<EditionSlug, ScheduleDay[]>);
+
+const SCHEDULE_DATA: Record<EditionSlug, ScheduleDay[]> = {
+  ...BASE_SCHEDULE_DATA,
+  ...SCHEDULE_OVERRIDES,
+};
 
 // "IMG_7147.JPG" -> "Img 7147"
 function prettyFromFilename(filename: string): string {
