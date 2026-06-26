@@ -5,6 +5,7 @@ import ArtistSignup from '@/components/ArtistSignup';
 import Presentation from '@/components/Presentation';
 import RecentNews from '@/components/RecentNews';
 import HighlightsGrid from '@/components/HighLightsGrid';
+import EventPopup from '@/components/EventPopup';
 
 const Home = () => {
   return (
@@ -27,6 +28,7 @@ const Home = () => {
         <meta name="author" content="Feira do Trabalho e do Campo DF" />
         <link rel="canonical" href="https://feiradotrabalhoedocampodf.com/" />
       </Helmet>
+      <EventPopup />
       <Hero />
       <ArtistSignup />
       <Presentation />
