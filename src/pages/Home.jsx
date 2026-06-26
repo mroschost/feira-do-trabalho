@@ -9,6 +9,8 @@ import EventPopup from '@/components/EventPopup';
 
 const Home = () => {
   const previewImage = 'https://feiradotrabalhoedocampodf.com/assets/images/feira.webp';
+  const siteDescription = 'Feira do Trabalho e do Campo DF. Abrindo caminhos para a agricultura familiar e negócios locais sustentáveis. Última edição: Plano Piloto 2026, de 30 de junho a 05 de julho, no Eixo Ibero Americano.';
+  const socialDescription = 'Feira do Trabalho e do Campo DF. Abrindo caminhos para a agricultura familiar e negócios locais sustentáveis. Última edição de 30 de junho a 05 de julho de 2026, no Plano Piloto - Eixo Ibero Americano.';
 
   return (
     <>
@@ -16,12 +18,12 @@ const Home = () => {
         <title>Última edição - Plano Piloto 2026 | Feira do Trabalho e do Campo DF</title>
         <meta 
           name="description" 
-          content="Última edição da Feira do Trabalho e do Campo DF: Plano Piloto 2026, de 30 de junho a 05 de julho, no Eixo Ibero Americano." 
+          content={siteDescription} 
         />
         <meta property="og:title" content="Última edição - Plano Piloto 2026 | Feira do Trabalho e do Campo DF" />
         <meta 
           property="og:description" 
-          content="Última edição da Feira do Trabalho e do Campo DF, de 30 de junho a 05 de julho de 2026, no Plano Piloto - Eixo Ibero Americano." 
+          content={socialDescription} 
         />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://feiradotrabalhoedocampodf.com/" />
@@ -32,7 +34,7 @@ const Home = () => {
         <meta property="og:image:alt" content="Logo da Feira do Trabalho e do Campo DF" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Última edição - Plano Piloto 2026 | Feira do Trabalho e do Campo DF" />
-        <meta name="twitter:description" content="De 30 de junho a 05 de julho de 2026, no Plano Piloto - Eixo Ibero Americano." />
+        <meta name="twitter:description" content={socialDescription} />
         <meta name="twitter:image" content={previewImage} />
         <meta name="keywords" content="feira, trabalho, campo, plano piloto, eixo ibero americano, última edição, distrito federal, sustentabilidade, agricultura" />
         <meta name="author" content="Feira do Trabalho e do Campo DF" />
