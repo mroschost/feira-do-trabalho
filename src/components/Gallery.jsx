@@ -10,6 +10,14 @@ const Gallery = () => {
 
   const editions = dataService.getEditions();
 
+  const getEditionTabLabel = (edition) => {
+    if (edition.slug === 'feira-da-torre-2026') {
+      return 'Plano Piloto 2026';
+    }
+
+    return edition.name;
+  };
+
   const currentPhotos = React.useMemo(() => galleryData[activeFilter]?.photos ?? [], [galleryData, activeFilter]);
 
   useEffect(() => {
@@ -113,7 +121,7 @@ const Gallery = () => {
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200 shadow-md'
               }`}
             >
-              {edition.name}
+              {getEditionTabLabel(edition)}
             </button>
           ))}
         </div>
