@@ -13,6 +13,14 @@ const Schedule = () => {
 
   const editions = dataService.getEditions();
 
+  const getEditionTabLabel = (edition) => {
+    if (edition.slug === 'feira-da-torre-2026') {
+      return 'Plano Piloto 2026';
+    }
+
+    return edition.name;
+  };
+
   useEffect(() => {
     const loadScheduleData = () => {
       const data = {};
@@ -61,7 +69,7 @@ const Schedule = () => {
                   : 'bg-white text-gray-700 hover:bg-gray-100 shadow-md'
               }`}
             >
-              {edition.name}
+              {getEditionTabLabel(edition)}
             </button>
           ))}
         </div>
