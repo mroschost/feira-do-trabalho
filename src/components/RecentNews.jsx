@@ -10,11 +10,31 @@ const RecentNews = () => {
 
   useEffect(() => {
     try {
-      const currentEdition = dataService.getCurrentEditionSlug();
-      const newsData = dataService.getNews(currentEdition);
-      setRecentNews(newsData.items.slice(0, 3));
+      const editions = dataService
+        .getEditions()
+        .filter((edition) => edition.slug)
+        .sort((a, b) => {
+          const dateA = new Date(`${a.endDate || a.startDate}T00:00:00-03:00`).getTime();
+          const dateB = new Date(`${b.endDate || b.startDate}T00:00:00-03:00`).getTime();
+
+          if (Number.isNaN(dateA) && Number.isNaN(dateB)) return 0;
+          if (Number.isNaN(dateA)) return 1;
+          if (Number.isNaN(dateB)) return -1;
+
+          return dateB - dateA;
+        });
+
+      const latestNews = editions.flatMap((edition) => {
+        const newsData = dataService.getNews(edition.slug);
+        return newsData.items.map((item) => ({
+          ...item,
+          editionName: edition.slug === 'feira-da-torre-2026' ? 'Plano Piloto 2026' : edition.name,
+        }));
+      });
+
+      setRecentNews(latestNews.slice(0, 3));
     } catch (error) {
-      console.error("Erro ao carregar notícias recentes:", error);
+      console.error('Erro ao carregar notícias recentes:', error);
     }
   }, []);
 
@@ -40,7 +60,7 @@ const RecentNews = () => {
             Últimas Notícias
           </h2>
           <p className="max-w-2xl mx-auto text-lg text-gray-600">
-            Fique por dentro das novidades mais recentes sobre a feira.
+            Acompanhe as principais atualizações e repercussões das edições da Feira do Trabalho e do Campo DF.
           </p>
         </motion.div>
 
@@ -48,7 +68,7 @@ const RecentNews = () => {
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
             {recentNews.map((item, index) => (
               <motion.article
-                key={index}
+                key={`${item.link}-${index}`}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
@@ -70,6 +90,11 @@ const RecentNews = () => {
                   </div>
                 </div>
                 <div className="p-6">
+                  {item.editionName ? (
+                    <span className="inline-flex items-center rounded-full bg-green-50 px-3 py-1 text-xs font-semibold text-[#3FA637] mb-3">
+                      {item.editionName}
+                    </span>
+                  ) : null}
                   <h3 className="text-xl font-bold text-gray-800 mb-3 line-clamp-2 group-hover:text-[#3FA637] transition-colors">
                     {item.title}
                   </h3>
@@ -96,7 +121,7 @@ const RecentNews = () => {
             to="/noticias"
             className="inline-flex items-center gap-2 bg-[#3FA637] text-white px-8 py-3 rounded-lg font-medium hover:bg-green-700 transition-colors shadow-lg"
           >
-            Ver todas as notícias
+            Ver mais notícias
             <ArrowRight className="w-5 h-5" />
           </Link>
         </div>
