@@ -1,8 +1,12 @@
-export const NEWS_FALLBACK_IMAGE = '/assets/images/feira.webp';
+import aguaQuenteNewsImage from '@/assets/images/news/agua-quente-2026.jpg';
+import cruzeiroNewsImage from '@/assets/images/news/cruzeiro-2025.jpg';
+import feiraLogoFallback from '@/assets/images/feira.webp';
+
+export const NEWS_FALLBACK_IMAGE = feiraLogoFallback;
 
 export const EDITION_NEWS_IMAGES = {
-  'agua-quente-2026': '/assets/news/agua-quente-2026.jpg',
-  'cruzeiro-2025': '/assets/news/cruzeiro-2025.jpg',
+  'agua-quente-2026': aguaQuenteNewsImage,
+  'cruzeiro-2025': cruzeiroNewsImage,
 };
 
 export const getEditionNewsFallbackImage = (editionSlug) => {
@@ -16,7 +20,7 @@ export const getNewsImageSrc = (image, editionSlug) => {
 
   const normalizedImage = image.trim();
 
-  if (!normalizedImage || normalizedImage === NEWS_FALLBACK_IMAGE) {
+  if (!normalizedImage || normalizedImage === '/assets/images/feira.webp') {
     return editionFallback;
   }
 
