@@ -1,21 +1,29 @@
-
 // time zone para lógica de data do carrossel
 export const TIME_ZONE = "America/Sao_Paulo";
 
-export type EditionSlug = "samambaia-2025" | "gama-2025" | "planaltina-2025" | "sao-sebastiao-2025";
+export type EditionSlug = string;
+
+export interface ArtistSignup {
+  formUrl: string;
+  startDate: `${number}-${number}-${number}` | "";
+  endDate: `${number}-${number}-${number}` | "";
+}
 
 export interface Edition {
   slug: EditionSlug;
   name: string;
-  startDate: `${number}-${number}-${number}`; // ISO YYYY-MM-DD
-  endDate: `${number}-${number}-${number}`;
+  location?: string;
+  startDate: `${number}-${number}-${number}` | ""; // ISO YYYY-MM-DD
+  endDate: `${number}-${number}-${number}` | "";
   isCurrent: boolean;
+  artistSignup?: ArtistSignup | null;
 }
 
 export interface HighlightDay {
   date: `${number}-${number}-${number}`; // ISO
   image: string; // URL (path local de asset permitido)
   alt: string;
+  items?: ReadonlyArray<Readonly<ScheduleItem>>;
 }
 
 export interface Highlights {
@@ -24,7 +32,7 @@ export interface Highlights {
 }
 
 export interface ScheduleItem {
-  time: string;   // "09:00" ou "08:00-11:00"
+  time: string;   // "09:00", "08:00-11:00" ou "Em breve"
   title: string;
 }
 
