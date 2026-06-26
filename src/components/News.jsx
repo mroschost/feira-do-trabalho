@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ExternalLink, Calendar } from 'lucide-react';
 import { dataService } from '@/services/DataService';
-import { getNewsImageSrc, handleNewsImageError } from '@/utils/newsImageUtils';
+import { getEditionNewsFallbackImage, getNewsImageSrc, handleNewsImageError } from '@/utils/newsImageUtils';
 
 const News = () => {
   const activeSlug = dataService.getCurrentEditionSlug();
@@ -101,7 +101,8 @@ const News = () => {
                     <img
                       className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
                       alt={`Imagem da notícia: ${item.title}`}
-                      src={getNewsImageSrc(item.image)}
+                      src={getNewsImageSrc(item.image, activeFilter)}
+                      data-fallback-src={getEditionNewsFallbackImage(activeFilter)}
                       onError={handleNewsImageError}
                       loading="lazy"
                       decoding="async"
