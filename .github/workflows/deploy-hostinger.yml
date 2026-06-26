@@ -1,19 +1,24 @@
-name: Deploy - Hostinger (SSH)
+name: Deploy - Hostinger via master
 
 on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
+
+concurrency:
+  group: hostinger-master-deploy
+  cancel-in-progress: true
 
 jobs:
-  build-and-deploy:
+  build-and-publish-master:
     runs-on: ubuntu-22.04
 
     steps:
-      - name: Checkout repository
+      - name: Checkout source branch
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
@@ -25,56 +30,52 @@ jobs:
           node-version: 20
 
       - name: Install dependencies
-        run: npm i
+        run: npm install
 
       - name: Build project
         run: npm run build
 
-      - name: Start ssh-agent and add key
-        uses: webfactory/ssh-agent@v0.9.0
-        with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-
-      - name: Add SSH known_hosts
-        shell: bash
+      - name: Validate Hostinger output
         run: |
           set -euo pipefail
-          mkdir -p ~/.ssh
-          chmod 700 ~/.ssh
+          test -d dist/assets
+          test -f dist/index.html
+          test -f dist/.htaccess
+          test -f dist/llms.txt
+          echo "Build validado: assets, index.html, .htaccess e llms.txt encontrados."
 
-          PORT="${{ secrets.SSH_PORT }}"
-          if [ -z "${PORT}" ]; then PORT="65002"; fi
+      - name: Publish dist to master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
 
-          HOSTPORT="[${{ secrets.SSH_HOST }}]:${PORT}"
+          rm -rf /tmp/hostinger-dist
+          mkdir -p /tmp/hostinger-dist
+          cp -a dist/. /tmp/hostinger-dist/
 
-          echo "Fetching host key for ${HOSTPORT}..."
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          # Retry a few times because some hosts may take a moment to respond
-          for i in 1 2 3; do
-            ssh-keyscan -p "${PORT}" -T 10 -t rsa,ecdsa,ed25519 "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts && break
-            echo "ssh-keyscan attempt ${i} failed; retrying in 2s..."
-            sleep 2
-          done
+          git checkout --orphan hostinger-master
+          git rm -rf . >/dev/null 2>&1 || true
+          find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
 
-          # Fail explicitly if we still have no host key
-          if ! ssh-keygen -F "${HOSTPORT}" -f ~/.ssh/known_hosts >/dev/null; then
-            echo "Failed to add host key to known_hosts for ${HOSTPORT}. Verify SSH_HOST/SSH_PORT and confirm SSH is enabled in Hostinger." >&2
-            exit 1
+          cp -a /tmp/hostinger-dist/. .
+
+          # A branch master fica como a pasta public_html da Hostinger:
+          # assets/, .htaccess, index.html e llms.txt.
+          test -d assets
+          test -f index.html
+          test -f .htaccess
+          test -f llms.txt
+
+          git add -A
+
+          if git diff --cached --quiet; then
+            echo "Nenhuma alteração no build para publicar."
+            exit 0
           fi
 
-          chmod 600 ~/.ssh/known_hosts
-
-      - name: Test SSH connection
-        shell: bash
-        run: |
-          set -euo pipefail
-          PORT="${{ secrets.SSH_PORT }}"
-          if [ -z "${PORT}" ]; then PORT="65002"; fi
-
-          ssh -p "${PORT}" -o BatchMode=yes -o ConnectTimeout=10 "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" "echo SSH OK"
-
-      - name: Deploy dist to Hostinger via rsync
-        run: |
-          PORT="${{ secrets.SSH_PORT }}"; if [ -z "${PORT}" ]; then PORT="65002"; fi
-          rsync -avz --delete -e "ssh -p ${PORT}" dist/ \
-            ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.SSH_PATH }}
+          git commit -m "Deploy build to Hostinger"
+          git push --force "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" HEAD:master
