@@ -157,8 +157,8 @@ const Hero = () => {
               </div>
 
               {/* Local */}
-              <div className="flex items-start justify-center gap-3 px-6 py-3 rounded-full shadow-sm bg-white/70 backdrop-blur-sm ring-1 ring-black/5 w-full sm:w-[520px]">
-                <MapPin className="w-6 h-6 text-[#3FA637]" aria-hidden="true" />
+              <div className="flex items-center justify-center gap-3 px-6 py-3 rounded-full shadow-sm bg-white/70 backdrop-blur-sm ring-1 ring-black/5 w-full sm:w-[520px]">
+                <MapPin className="w-6 h-6 shrink-0 text-[#3FA637]" aria-hidden="true" />
                 <div
                   className="text-lg font-medium text-gray-900 text-center leading-snug whitespace-normal break-words
                      drop-shadow-[0_1px_0_rgba(255,255,255,0.7)]"
@@ -242,8 +242,8 @@ const Hero = () => {
             </div>
 
             {/* Local (chip) */}
-            <div className="flex items-start justify-center gap-3 px-5 py-3 rounded-full shadow-sm bg-white/70 backdrop-blur-sm ring-1 ring-black/5 w-full max-w-[520px]">
-              <MapPin className="h-5 w-5 text-[#3FA637] mt-0.5" aria-hidden="true" />
+            <div className="flex items-center justify-center gap-3 px-5 py-3 rounded-full shadow-sm bg-white/70 backdrop-blur-sm ring-1 ring-black/5 w-full max-w-[520px]">
+              <MapPin className="h-5 w-5 shrink-0 text-[#3FA637]" aria-hidden="true" />
               <div className="font-medium leading-snug text-center text-gray-900 break-words whitespace-normal">
                 <div>{LOCATION_PLACE}</div>
                 {LOCATION_CITY ? <div>{LOCATION_CITY}</div> : null}
