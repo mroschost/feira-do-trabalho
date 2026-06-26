@@ -14,7 +14,7 @@ import {
 
 // === JSON loader (Vite) ============================================
 // Fonte de verdade: /src/data/editions.json, /src/data/schedule.json, /src/data/news.json
-// schedule-overrides.json pode sobrescrever/adicionar programações pontuais sem mexer no arquivo grande.
+// schedule-overrides.json e news-overrides.json podem sobrescrever/adicionar dados pontuais sem mexer nos arquivos grandes.
 // Highlights agora são derivados da programação do dia.
 
 const __DATA__: Record<string, unknown> = (import.meta as any).glob("/src/data/*.json", {
@@ -225,9 +225,18 @@ export function buildGalleryData(): Record<EditionSlug, GalleryPhoto[]> {
 
 const GALLERY_DATA = buildGalleryData();
 
-const NEWS_DATA: Record<EditionSlug, NewsItem[]> = requireJson<
+const BASE_NEWS_DATA: Record<EditionSlug, NewsItem[]> = requireJson<
   Record<EditionSlug, NewsItem[]>
 >("news");
+
+const NEWS_OVERRIDES: Record<EditionSlug, NewsItem[]> = optionalJson<
+  Record<EditionSlug, NewsItem[]>
+>("news-overrides", {} as Record<EditionSlug, NewsItem[]>);
+
+const NEWS_DATA: Record<EditionSlug, NewsItem[]> = {
+  ...BASE_NEWS_DATA,
+  ...NEWS_OVERRIDES,
+};
 
 class DataService implements IDataService {
   getEditions(): Readonly<Edition[]> {
