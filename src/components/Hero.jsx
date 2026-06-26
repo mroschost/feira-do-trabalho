@@ -55,16 +55,20 @@ const Hero = () => {
       startDate.getMonth() === endDate.getMonth() &&
       startDate.getFullYear() === endDate.getFullYear();
 
+    const sameYear = startDate.getFullYear() === endDate.getFullYear();
+
     const startDay = String(startDate.getDate()).padStart(2, "0");
     const endDay = String(endDate.getDate()).padStart(2, "0");
 
-    const monthName = new Intl.DateTimeFormat("pt-BR", { month: "long" }).format(
-      sameMonth ? startDate : endDate
-    );
-    const monthTitle = monthName.charAt(0).toUpperCase() + monthName.slice(1);
+    const startMonthName = new Intl.DateTimeFormat("pt-BR", { month: "long" }).format(startDate);
+    const endMonthName = new Intl.DateTimeFormat("pt-BR", { month: "long" }).format(endDate);
 
     if (sameMonth) {
-      return `${startDay} a ${endDay} de ${monthTitle} de ${startDate.getFullYear()}`;
+      return `${startDay} a ${endDay} de ${endMonthName} de ${startDate.getFullYear()}`;
+    }
+
+    if (sameYear) {
+      return `${startDay} de ${startMonthName} a ${endDay} de ${endMonthName} de ${endDate.getFullYear()}`;
     }
 
     const startLabel = new Intl.DateTimeFormat("pt-BR", {
