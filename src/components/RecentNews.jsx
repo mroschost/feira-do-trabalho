@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ExternalLink, Calendar, ArrowRight } from 'lucide-react';
 import { dataService } from '@/services/DataService';
-import { getNewsImageSrc, handleNewsImageError } from '@/utils/newsImageUtils';
+import { getEditionNewsFallbackImage, getNewsImageSrc, handleNewsImageError } from '@/utils/newsImageUtils';
 
 const RecentNews = () => {
   const [recentNews, setRecentNews] = useState([]);
@@ -28,6 +28,7 @@ const RecentNews = () => {
         const newsData = dataService.getNews(edition.slug);
         return newsData.items.map((item) => ({
           ...item,
+          editionSlug: edition.slug,
           editionName: edition.slug === 'feira-da-torre-2026' ? 'Plano Piloto 2026' : edition.name,
         }));
       });
@@ -80,7 +81,8 @@ const RecentNews = () => {
                   <img
                     className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
                     alt={`Imagem da notícia: ${item.title}`}
-                    src={getNewsImageSrc(item.image)}
+                    src={getNewsImageSrc(item.image, item.editionSlug)}
+                    data-fallback-src={getEditionNewsFallbackImage(item.editionSlug)}
                     onError={handleNewsImageError}
                     loading="lazy"
                     decoding="async"
