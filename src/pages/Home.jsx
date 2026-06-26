@@ -11,20 +11,20 @@ const Home = () => {
   return (
     <>
       <Helmet>
-        <title>Última edição - Feira da Torre | Feira do Trabalho e do Campo DF</title>
+        <title>Plano Piloto 2026 | Feira do Trabalho e do Campo DF</title>
         <meta 
           name="description" 
-          content="Última edição - Feira da Torre, de 30 de junho a 05 de julho de 2026, em Brasília-DF." 
+          content="Plano Piloto 2026 da Feira do Trabalho e do Campo DF, de 30 de junho a 05 de julho de 2026, no Eixo Ibero Americano." 
         />
-        <meta property="og:title" content="Última edição - Feira da Torre | Feira do Trabalho e do Campo DF" />
+        <meta property="og:title" content="Plano Piloto 2026 | Feira do Trabalho e do Campo DF" />
         <meta 
           property="og:description" 
-          content="De 30 de junho a 05 de julho de 2026, na Feira da Torre, em Brasília-DF." 
+          content="De 30 de junho a 05 de julho de 2026, no Plano Piloto - Eixo Ibero Americano." 
         />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://feiradotrabalhoedocampodf.com/" />
         <meta property="og:locale" content="pt_BR" />
-        <meta name="keywords" content="feira, trabalho, campo, feira da torre, distrito federal, sustentabilidade, agricultura" />
+        <meta name="keywords" content="feira, trabalho, campo, plano piloto, eixo ibero americano, distrito federal, sustentabilidade, agricultura" />
         <meta name="author" content="Feira do Trabalho e do Campo DF" />
         <link rel="canonical" href="https://feiradotrabalhoedocampodf.com/" />
       </Helmet>
