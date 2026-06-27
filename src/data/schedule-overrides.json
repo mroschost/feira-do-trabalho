@@ -4,8 +4,20 @@
       "date": "2026-06-30",
       "items": [
         {
-          "time": "Em breve",
-          "title": "Programação a confirmar"
+          "time": "13h às 15h",
+          "title": "Oficina de Fuxico — Grupo dos idosos"
+        },
+        {
+          "time": "16h às 18h",
+          "title": "Oficina de Ecobag"
+        },
+        {
+          "time": "21h",
+          "title": "Encerramento"
+        },
+        {
+          "time": "Ônibus",
+          "title": "5 ônibus"
         }
       ]
     },
@@ -13,8 +25,24 @@
       "date": "2026-07-01",
       "items": [
         {
-          "time": "Em breve",
-          "title": "Programação a confirmar"
+          "time": "13h às 15h",
+          "title": "Oficina de Pintura em Tecido — Grupo de mulheres em tratamento de câncer / Associações de Mulheres do Bandeirante"
+        },
+        {
+          "time": "16h às 18h",
+          "title": "Oficina de Biojoias"
+        },
+        {
+          "time": "19h às 20h",
+          "title": "Palestra — Como usar as redes sociais"
+        },
+        {
+          "time": "21h",
+          "title": "Encerramento"
+        },
+        {
+          "time": "Ônibus",
+          "title": "6 ônibus"
         }
       ]
     },
@@ -22,8 +50,24 @@
       "date": "2026-07-02",
       "items": [
         {
-          "time": "Em breve",
-          "title": "Programação a confirmar"
+          "time": "13h às 15h",
+          "title": "Oficina de Cama Pet — Grupo de idosos"
+        },
+        {
+          "time": "16h às 18h",
+          "title": "Oficina de Bordado"
+        },
+        {
+          "time": "19h às 20h",
+          "title": "Palestra — Prevenção de acidentes no trabalho"
+        },
+        {
+          "time": "21h",
+          "title": "Encerramento"
+        },
+        {
+          "time": "Ônibus",
+          "title": "6 ônibus"
         }
       ]
     },
@@ -31,8 +75,24 @@
       "date": "2026-07-03",
       "items": [
         {
-          "time": "Em breve",
-          "title": "Programação a confirmar"
+          "time": "13h às 15h",
+          "title": "Oficina de Biojoias — Escolas"
+        },
+        {
+          "time": "15h às 16h",
+          "title": "Apresentação Infantil"
+        },
+        {
+          "time": "18h às 20h",
+          "title": "Workshop — Plano de Negócios para Empreendedores da Economia Solidária"
+        },
+        {
+          "time": "21h",
+          "title": "Encerramento"
+        },
+        {
+          "time": "Ônibus",
+          "title": "6 ônibus"
         }
       ]
     },
@@ -40,8 +100,28 @@
       "date": "2026-07-04",
       "items": [
         {
-          "time": "Em breve",
-          "title": "Programação a confirmar"
+          "time": "10h",
+          "title": "Feira Livre, Exposição e Comercialização"
+        },
+        {
+          "time": "10h30 às 11h30",
+          "title": "Entrega de Certificados"
+        },
+        {
+          "time": "11h40 às 12h40",
+          "title": "Apresentação Artística 1 — Banda local"
+        },
+        {
+          "time": "16h às 17h",
+          "title": "Apresentação Artística 2 — Banda local"
+        },
+        {
+          "time": "17h30 às 18h30",
+          "title": "Apresentação Artística — Banda regional"
+        },
+        {
+          "time": "19h",
+          "title": "Encerramento das atividades do dia"
         }
       ]
     },
@@ -49,8 +129,24 @@
       "date": "2026-07-05",
       "items": [
         {
-          "time": "Em breve",
-          "title": "Programação a confirmar"
+          "time": "10h às 19h",
+          "title": "Feira Livre, Exposição e Comercialização"
+        },
+        {
+          "time": "16h às 17h",
+          "title": "Apresentação Artística — Nacional"
+        },
+        {
+          "time": "17h às 18h",
+          "title": "Apresentação Artística — Nacional"
+        },
+        {
+          "time": "18h às 19h",
+          "title": "Apresentação Artística — Nacional"
+        },
+        {
+          "time": "19h",
+          "title": "Encerramento oficial da feira, visitação e comercialização"
         }
       ]
     }
