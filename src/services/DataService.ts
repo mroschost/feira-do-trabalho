@@ -238,6 +238,28 @@ const NEWS_DATA: Record<EditionSlug, NewsItem[]> = {
   ...NEWS_OVERRIDES,
 };
 
+const NEWS_IMAGE_BY_EDITION: Partial<Record<EditionSlug, string>> = {
+  "agua-quente-2026": "/assets/news/agua-quente-2026.jpg",
+  "cruzeiro-2025": "/assets/news/cruzeiro-2025.jpg",
+};
+
+function withEditionNewsImage(item: NewsItem, edition: EditionSlug): NewsItem {
+  const editionImage = NEWS_IMAGE_BY_EDITION[edition];
+  if (!editionImage) return item;
+
+  const image = typeof item.image === "string" ? item.image.trim() : "";
+  const usesOldLogoPath = image === "/assets/images/feira.webp" || image.endsWith("/assets/images/feira.webp");
+
+  if (!image || usesOldLogoPath) {
+    return {
+      ...item,
+      image: editionImage,
+    };
+  }
+
+  return item;
+}
+
 class DataService implements IDataService {
   getEditions(): Readonly<Edition[]> {
     return deepFreeze(copyArr(EDITIONS));
@@ -316,8 +338,11 @@ class DataService implements IDataService {
     // Remove placeholders/exemplos
     const filtered = items.filter(isRealNewsItem);
 
+    // Normaliza imagens que estavam apontando para um caminho que não existe no build
+    const normalized = filtered.map((item) => withEditionNewsImage(item, validatedSlug));
+
     // Retorna em ordem invertida (sem mutar a origem)
-    const reversed = [...filtered].reverse();
+    const reversed = [...normalized].reverse();
     return deepFreeze({ edition: validatedSlug, items: copyArr(reversed) });
   }
 }
