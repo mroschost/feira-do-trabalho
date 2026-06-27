@@ -89,7 +89,7 @@ function handleViteOverlay(node) {
 		<script type="module">
 const originalConsoleError = console.error;
 console.error = function(...args) {
-	originalConsoleError.apply(console, args);
+	originalConsoleError.apply(this, args);
 
 	let errorString = '';
 
@@ -152,6 +152,6 @@ window.fetch = function(...args) {
 	</head>
 	<body>
 		<div id="root"></div>
-		
+		<script defer src="/hotfix-schedule.js?v=20260627"></script>
 	</body>
 </html>
