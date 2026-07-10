@@ -1,11 +1,9 @@
 (function () {
   const EDITIONS = {
     aguaQuente: {
-      labels: ['agua quente'],
       image: 'https://raw.githubusercontent.com/mroschost/feira-do-trabalho/master/assets/news/agua-quente-2026.jpg'
     },
     cruzeiro: {
-      labels: ['cruzeiro'],
       image: 'https://raw.githubusercontent.com/mroschost/feira-do-trabalho/master/assets/news/cruzeiro-2025.jpg'
     }
   };
@@ -131,8 +129,10 @@
   }
 
   function startAggressivePatch(editionKey) {
-    if (editionKey) selectedEdition = editionKey;
-    patchUntil = Date.now() + 10000;
+    selectedEdition = editionKey || null;
+    patchUntil = editionKey ? Date.now() + 10000 : 0;
+
+    if (!editionKey) return;
 
     patchAll();
     setTimeout(patchAll, 50);
@@ -150,15 +150,22 @@
 
     if (!target) return;
 
-    const editionKey = editionFromText(target.textContent);
-    if (editionKey) {
-      startAggressivePatch(editionKey);
+    const newsSection = findNewsSection();
+    const isNewsFilterButton =
+      target.tagName === 'BUTTON' &&
+      newsSection &&
+      newsSection.contains(target);
+
+    if (isNewsFilterButton) {
+      startAggressivePatch(editionFromText(target.textContent));
       return;
     }
 
     if (normalizeText(target.textContent).indexOf('noticias') !== -1) {
       selectedEdition = null;
-      startAggressivePatch(null);
+      patchUntil = 0;
+      setTimeout(patchAll, 150);
+      setTimeout(patchAll, 500);
     }
   }, true);
 
@@ -195,11 +202,16 @@
       attributeFilter: ['src', 'srcset']
     });
 
-    startAggressivePatch(null);
+    const initialSection = findNewsSection();
+    const initialEdition = detectSelectedEdition(initialSection);
+    if (initialEdition) startAggressivePatch(initialEdition);
+
+    setTimeout(patchRecentNews, 250);
+    setTimeout(patchRecentNews, 750);
+    setTimeout(patchRecentNews, 1500);
 
     const interval = setInterval(function () {
-      if (Date.now() > patchUntil && !selectedEdition) return;
-      patchAll();
+      if (Date.now() <= patchUntil && selectedEdition) patchAll();
     }, 250);
 
     window.addEventListener('beforeunload', function () {
