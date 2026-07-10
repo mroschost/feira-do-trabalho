@@ -1,8 +1,17 @@
 (function () {
-  const editionImages = {
-    aguaQuente: '/assets/news/agua-quente-2026.jpg?v=20260710',
-    cruzeiro: '/assets/news/cruzeiro-2025.jpg?v=20260710',
+  const EDITIONS = {
+    aguaQuente: {
+      labels: ['agua quente'],
+      image: 'https://raw.githubusercontent.com/mroschost/feira-do-trabalho/master/assets/news/agua-quente-2026.jpg'
+    },
+    cruzeiro: {
+      labels: ['cruzeiro'],
+      image: 'https://raw.githubusercontent.com/mroschost/feira-do-trabalho/master/assets/news/cruzeiro-2025.jpg'
+    }
   };
+
+  let selectedEdition = null;
+  let patchUntil = 0;
 
   function normalizeText(value) {
     return String(value || '')
@@ -22,44 +31,73 @@
     return null;
   }
 
-  function setImage(image, editionKey) {
-    if (!image || !editionKey || !editionImages[editionKey]) return false;
-
-    const expected = editionImages[editionKey];
-    const current = image.getAttribute('src') || '';
-
-    if (current.indexOf(expected.split('?')[0]) !== -1) return false;
-
-    image.dataset.newsEditionImage = editionKey;
-    image.src = expected;
-    image.removeAttribute('srcset');
-    return true;
+  function findNewsSection() {
+    return document.querySelector('#noticias') || Array.from(document.querySelectorAll('section')).find(function (section) {
+      const heading = section.querySelector('h1, h2');
+      return heading && normalizeText(heading.textContent) === 'noticias';
+    }) || null;
   }
 
-  function getActiveNewsEdition(section) {
+  function detectSelectedEdition(section) {
+    if (selectedEdition) return selectedEdition;
     if (!section) return null;
 
     const buttons = Array.from(section.querySelectorAll('button'));
-    const activeButton = buttons.find(function (button) {
-      const className = button.getAttribute('class') || '';
-      return className.indexOf('bg-[#3FA637]') !== -1
-        || button.getAttribute('aria-selected') === 'true'
-        || button.getAttribute('data-state') === 'active';
-    });
 
-    return editionFromText(activeButton ? activeButton.textContent : '');
+    for (let index = 0; index < buttons.length; index += 1) {
+      const button = buttons[index];
+      const edition = editionFromText(button.textContent);
+      if (!edition) continue;
+
+      const className = button.getAttribute('class') || '';
+      const style = window.getComputedStyle ? window.getComputedStyle(button) : null;
+      const isActive =
+        button.getAttribute('aria-selected') === 'true' ||
+        button.getAttribute('data-state') === 'active' ||
+        className.indexOf('text-white') !== -1 ||
+        className.indexOf('bg-[#3FA637]') !== -1 ||
+        (style && style.color === 'rgb(255, 255, 255)');
+
+      if (isActive) return edition;
+    }
+
+    return null;
   }
 
-  function patchNewsPage() {
-    const section = document.querySelector('#noticias');
+  function applyImage(image, editionKey) {
+    const edition = EDITIONS[editionKey];
+    if (!image || !edition) return false;
+
+    const expected = edition.image;
+    const current = image.getAttribute('src') || '';
+
+    image.setAttribute('data-news-edition-image', editionKey);
+    image.setAttribute('data-fallback-src', expected);
+    image.removeAttribute('srcset');
+    image.setAttribute('loading', 'eager');
+
+    image.onerror = function () {
+      if (this.src !== expected) this.src = expected;
+    };
+
+    if (current !== expected) {
+      image.src = expected;
+      return true;
+    }
+
+    return false;
+  }
+
+  function patchNewsCards() {
+    const section = findNewsSection();
     if (!section) return false;
 
-    const editionKey = getActiveNewsEdition(section);
+    const editionKey = detectSelectedEdition(section);
     if (!editionKey) return false;
 
     let changed = false;
-    section.querySelectorAll('article img').forEach(function (image) {
-      changed = setImage(image, editionKey) || changed;
+    section.querySelectorAll('img').forEach(function (image) {
+      changed = applyImage(image, editionKey) || changed;
     });
 
     return changed;
@@ -76,30 +114,33 @@
 
     let changed = false;
 
-    section.querySelectorAll('article').forEach(function (article) {
-      const editionKey = editionFromText(article.textContent);
-      const image = article.querySelector('img');
-      changed = setImage(image, editionKey) || changed;
+    section.querySelectorAll('article, .group').forEach(function (card) {
+      const editionKey = editionFromText(card.textContent);
+      if (!editionKey) return;
+
+      const image = card.querySelector('img');
+      changed = applyImage(image, editionKey) || changed;
     });
 
     return changed;
   }
 
-  function patchBrokenImages() {
-    document.querySelectorAll('img').forEach(function (image) {
-      if (image.complete && image.naturalWidth === 0) {
-        const article = image.closest('article');
-        const section = image.closest('#noticias');
-        const editionKey = editionFromText(article ? article.textContent : '') || getActiveNewsEdition(section);
-        setImage(image, editionKey);
-      }
-    });
+  function patchAll() {
+    patchNewsCards();
+    patchRecentNews();
   }
 
-  function patchAll() {
-    patchNewsPage();
-    patchRecentNews();
-    patchBrokenImages();
+  function startAggressivePatch(editionKey) {
+    if (editionKey) selectedEdition = editionKey;
+    patchUntil = Date.now() + 10000;
+
+    patchAll();
+    setTimeout(patchAll, 50);
+    setTimeout(patchAll, 150);
+    setTimeout(patchAll, 350);
+    setTimeout(patchAll, 700);
+    setTimeout(patchAll, 1200);
+    setTimeout(patchAll, 2500);
   }
 
   document.addEventListener('click', function (event) {
@@ -110,21 +151,29 @@
     if (!target) return;
 
     const editionKey = editionFromText(target.textContent);
-    if (editionKey || normalizeText(target.textContent).indexOf('noticias') !== -1) {
-      setTimeout(patchAll, 50);
-      setTimeout(patchAll, 200);
-      setTimeout(patchAll, 600);
+    if (editionKey) {
+      startAggressivePatch(editionKey);
+      return;
     }
-  });
+
+    if (normalizeText(target.textContent).indexOf('noticias') !== -1) {
+      selectedEdition = null;
+      startAggressivePatch(null);
+    }
+  }, true);
 
   document.addEventListener('error', function (event) {
     const image = event.target;
     if (!image || image.tagName !== 'IMG') return;
 
-    const article = image.closest('article');
     const section = image.closest('#noticias');
-    const editionKey = editionFromText(article ? article.textContent : '') || getActiveNewsEdition(section);
-    setImage(image, editionKey);
+    const card = image.closest('article, .group');
+    const editionKey =
+      editionFromText(card ? card.textContent : '') ||
+      detectSelectedEdition(section) ||
+      selectedEdition;
+
+    if (editionKey) applyImage(image, editionKey);
   }, true);
 
   let queued = false;
@@ -134,16 +183,29 @@
 
     setTimeout(function () {
       queued = false;
-      patchAll();
-    }, 80);
+      if (Date.now() <= patchUntil || selectedEdition) patchAll();
+    }, 40);
   });
 
   function start() {
-    patchAll();
-    observer.observe(document.body, { childList: true, subtree: true });
-    setTimeout(patchAll, 250);
-    setTimeout(patchAll, 750);
-    setTimeout(patchAll, 1500);
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+      attributes: true,
+      attributeFilter: ['src', 'srcset']
+    });
+
+    startAggressivePatch(null);
+
+    const interval = setInterval(function () {
+      if (Date.now() > patchUntil && !selectedEdition) return;
+      patchAll();
+    }, 250);
+
+    window.addEventListener('beforeunload', function () {
+      clearInterval(interval);
+      observer.disconnect();
+    }, { once: true });
   }
 
   if (document.readyState === 'loading') {
