@@ -76,7 +76,7 @@
 
   function renderSchedule() {
     return '<div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3" data-schedule-hotfix="plano-piloto-2026">' + schedule.map(function (day) {
-      return '<div class="flex flex-col overflow-hidden bg-white shadow-lg rounded-xl feira-hotfix-card">'
+      return '<div class="flex flex-col overflow-hidden bg-white shadow-lg rounded-xl">'
         + '<div class="bg-[#3FA637] text-white p-6"><div class="flex items-center gap-3">'
         + calendarIcon
         + '<h3 class="text-xl font-bold">' + escapeHtml(day.date) + '</h3>'
@@ -93,76 +93,64 @@
     }).join('') + '</div>';
   }
 
-  function findScheduleSection() {
+  function findSection() {
     return document.querySelector('#cronograma') || Array.from(document.querySelectorAll('section')).find(function (section) {
-      return section.textContent && section.textContent.indexOf('Cronograma') !== -1;
+      return (section.textContent || '').indexOf('Cronograma') !== -1;
     });
   }
 
-  function findScheduleContent(section) {
-    if (!section) return null;
-    const exact = section.querySelector('.mx-auto.max-w-7xl');
-    if (exact) return exact;
-
-    const candidates = Array.from(section.querySelectorAll('div'));
-    return candidates.find(function (element) {
-      const text = element.textContent || '';
-      return text.indexOf('Programação a confirmar') !== -1 || text.indexOf('Cronograma não disponível') !== -1;
-    });
-  }
-
-  function shouldPatch(section) {
-    if (!section) return false;
-    if (section.querySelector('[data-schedule-hotfix="plano-piloto-2026"]')) return false;
-
-    const text = section.textContent || '';
-    const hasPlanoPilotoButton = text.indexOf('Plano Piloto 2026') !== -1 || text.indexOf('Última edição - Feira da Torre') !== -1;
-    const hasOldPlaceholder = text.indexOf('Programação a confirmar') !== -1 || text.indexOf('Cronograma não disponível') !== -1;
-    const isScheduleRoute = window.location.pathname.indexOf('cronograma') !== -1 || window.location.hash.indexOf('cronograma') !== -1 || text.indexOf('Cronograma') !== -1;
-
-    return isScheduleRoute && (hasOldPlaceholder || hasPlanoPilotoButton);
+  function hasPlaceholder(section) {
+    const text = section ? section.textContent || '' : '';
+    return text.indexOf('Programação a confirmar') !== -1
+      || text.indexOf('Programação em breve') !== -1
+      || text.indexOf('Cronograma não disponível') !== -1;
   }
 
   function patchSchedule() {
-    const section = findScheduleSection();
-    if (!shouldPatch(section)) return false;
+    const section = findSection();
+    if (!section || !hasPlaceholder(section)) return false;
 
-    const content = findScheduleContent(section);
+    const content = section.querySelector('.mx-auto.max-w-7xl');
     if (!content) return false;
 
     content.innerHTML = renderSchedule();
-    content.setAttribute('data-schedule-hotfix-applied', 'true');
     return true;
   }
 
-  function schedulePatch() {
-    setTimeout(patchSchedule, 50);
-    setTimeout(patchSchedule, 250);
-    setTimeout(patchSchedule, 750);
-    setTimeout(patchSchedule, 1500);
+  let patchQueued = false;
+  function queuePatch() {
+    if (patchQueued) return;
+    patchQueued = true;
+    window.setTimeout(function () {
+      patchQueued = false;
+      patchSchedule();
+    }, 80);
   }
 
-  document.addEventListener('click', function (event) {
-    const target = event.target && event.target.closest ? event.target.closest('button, a') : null;
-    if (!target) return;
+  function start() {
+    patchSchedule();
 
-    const label = target.textContent || '';
-    if (label.indexOf('Plano Piloto') !== -1 || label.indexOf('Cronograma') !== -1) {
-      schedulePatch();
-    }
-  });
+    const observer = new MutationObserver(queuePatch);
+    observer.observe(document.body, { childList: true, subtree: true });
 
-  let attempts = 0;
-  const interval = setInterval(function () {
-    attempts += 1;
-    if (patchSchedule() || attempts >= 30) {
-      clearInterval(interval);
-    }
-  }, 500);
+    document.addEventListener('click', function (event) {
+      const target = event.target && event.target.closest ? event.target.closest('button, a') : null;
+      if (!target) return;
+      const label = target.textContent || '';
+      if (label.indexOf('Plano Piloto') !== -1 || label.indexOf('Cronograma') !== -1) {
+        window.setTimeout(patchSchedule, 100);
+        window.setTimeout(patchSchedule, 350);
+      }
+    });
+
+    window.setTimeout(patchSchedule, 300);
+    window.setTimeout(patchSchedule, 900);
+    window.setTimeout(patchSchedule, 1800);
+  }
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', schedulePatch);
+    document.addEventListener('DOMContentLoaded', start, { once: true });
   } else {
-    schedulePatch();
+    start();
   }
 })();
